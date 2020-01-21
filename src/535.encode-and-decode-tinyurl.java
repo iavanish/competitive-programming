@@ -35,21 +35,15 @@ public class Codec {
 
     private int sequenceNo;
     private Map<String, String> shortToLongMap;
-    private Map<String, String> longToShortMap;
 
     public Codec() {
         sequenceNo = 0;
         shortToLongMap = new HashMap<>();
-        longToShortMap = new HashMap<>();
     }
 
     // Encodes a URL to a shortened URL.
     public String encode(String longUrl) {
-        if(longToShortMap.containsKey(longUrl)) {
-            return longToShortMap.get(longUrl);
-        }
         String shortUrl = String.valueOf(sequenceNo++);
-        longToShortMap.put(longUrl, shortUrl);
         shortToLongMap.put(shortUrl, longUrl);
         return shortUrl;
     }
