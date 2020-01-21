@@ -93,29 +93,24 @@ import java.util.Stack;
 class Solution {
 
     public String removeOuterParentheses(String S) {
-        List<String> removeOuterParentheses = new ArrayList<>();
-        StringBuilder temp = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        int startingIndex = 0;
         int stack = 0;
-        for(int j = 0; j < S.length(); j++) {
-            temp.append(S.charAt(j));
-            if(S.charAt(j) == '(') {
+        for(int i = 0; i < S.length(); i++) {
+            if(S.charAt(i) == '(') {
                 stack++;
             }
             else {
                 stack--;
                 if(stack == 0) {
-                    removeOuterParentheses.add(temp.toString());
-                    temp = new StringBuilder();
+                    if(startingIndex + 1 < i) {
+                        result.append(S, startingIndex+1, i);
+                    }
+                    startingIndex = i+1;
                 }
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        for(String i : removeOuterParentheses) {
-            if(i.length() > 2) {
-                result.append(i, 1, i.length()-1);
-            }
-        }
         return result.toString();
     }
 
