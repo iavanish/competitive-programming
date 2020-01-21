@@ -46,24 +46,25 @@
  * 
  */
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 // @lc code=start
 class Solution {
 
     public int[] anagramMappings(int[] A, int[] B) {
-        Queue<Integer>[] characterQueue = new Queue[100001];
+        Map<Integer, Queue<Integer>> characterQueue = new HashMap<>();
         for(int i = 0; i < B.length; i++) {
-            if(characterQueue[B[i]] == null) {
-                characterQueue[B[i]] = new LinkedList<>();
-            }
-            characterQueue[B[i]].add(i);
+            Queue<Integer> queue = characterQueue.getOrDefault(B[i], new LinkedList<>());
+            queue.add(i);
+            characterQueue.put(B[i], queue);
         }
 
         int[] p = new int[A.length];
         for(int i = 0; i < A.length; i++) {
-            p[i] = characterQueue[A[i]].poll();
+            p[i] = characterQueue.get(A[i]).poll();
         }
 
         return p;
