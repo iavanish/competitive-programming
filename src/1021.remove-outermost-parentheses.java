@@ -94,19 +94,20 @@ class Solution {
 
     public String removeOuterParentheses(String S) {
         StringBuilder result = new StringBuilder();
-        int startingIndex = 0;
-        int stack = 0;
-        for(int i = 0; i < S.length(); i++) {
+        int stack = 1;
+        for(int i = 1; i < S.length()-1; i++) {
             if(S.charAt(i) == '(') {
                 stack++;
+                result.append('(');
             }
             else {
                 stack--;
-                if(stack == 0) {
-                    if(startingIndex + 1 < i) {
-                        result.append(S, startingIndex+1, i);
-                    }
-                    startingIndex = i+1;
+                if(stack > 0) {
+                    result.append(')');
+                }
+                else {
+                    stack = 1;
+                    i++;
                 }
             }
         }
