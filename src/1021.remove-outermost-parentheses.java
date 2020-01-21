@@ -93,37 +93,30 @@ import java.util.Stack;
 class Solution {
 
     public String removeOuterParentheses(String S) {
-        List<String> temp = removeOuterParentheses(List.of(S));
+        List<String> removeOuterParentheses = new ArrayList<>();
+        StringBuilder temp = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+        for(int j = 0; j < S.length(); j++) {
+            temp.append(S.charAt(j));
+            if(S.charAt(j) == '(') {
+                stack.push('(');
+            }
+            else {
+                stack.pop();
+                if(stack.empty()) {
+                    removeOuterParentheses.add(temp.toString());
+                    temp = new StringBuilder();
+                }
+            }
+        }
 
         StringBuilder result = new StringBuilder();
-        for(String i : temp) {
+        for(String i : removeOuterParentheses) {
             if(i.length() > 2) {
-                result.append(i.substring(1, i.length()-1));
+                result.append(i, 1, i.length()-1);
             }
         }
         return result.toString();
-    }
-
-    private List<String> removeOuterParentheses(List<String> s) {
-        List<String> result = new ArrayList<>();
-        for(String i : s) {
-            StringBuilder temp = new StringBuilder();
-            Stack<Character> stack = new Stack<>();
-            for(int j = 0; j < i.length(); j++) {
-                temp.append(i.charAt(j));
-                if(i.charAt(j) == '(') {
-                    stack.push('(');
-                }
-                else {
-                    stack.pop();
-                    if(stack.empty()) {
-                        result.add(temp.toString());
-                        temp = new StringBuilder();
-                    }
-                }
-            }
-        }
-        return result;
     }
 
 }
