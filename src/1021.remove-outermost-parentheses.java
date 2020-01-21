@@ -95,15 +95,15 @@ class Solution {
     public String removeOuterParentheses(String S) {
         List<String> removeOuterParentheses = new ArrayList<>();
         StringBuilder temp = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        int stack = 0;
         for(int j = 0; j < S.length(); j++) {
             temp.append(S.charAt(j));
             if(S.charAt(j) == '(') {
-                stack.push('(');
+                stack++;
             }
             else {
-                stack.pop();
-                if(stack.empty()) {
+                stack--;
+                if(stack == 0) {
                     removeOuterParentheses.add(temp.toString());
                     temp = new StringBuilder();
                 }
