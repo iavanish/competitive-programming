@@ -45,25 +45,27 @@
  */
 class Solution {
 
+    private int maxDepth = 0;
+    private int maxDepthSum = 0;
+
     public int deepestLeavesSum(TreeNode root) {
-        return deepestLeavesSum(root, 1, height(root));
+        deepestLeavesSum(root, 0);
+        return maxDepthSum;
     }
 
-    private int height(TreeNode root) {
+    private void deepestLeavesSum(TreeNode root, int currDepth) {
         if(root == null) {
-            return 0;
+            return;
         }
-        return 1 + Math.max(height(root.left), height(root.right));
-    }
-
-    private int deepestLeavesSum(TreeNode root, int currDepth, int height) {
-        if(root == null) {
-            return 0;
+        if(currDepth == maxDepth) {
+            maxDepthSum += root.val;
         }
-        if(currDepth == height) {
-            return root.val;
+        if(currDepth > maxDepth) {
+            maxDepth = currDepth;
+            maxDepthSum = root.val;
         }
-        return deepestLeavesSum(root.left, currDepth+1, height) + deepestLeavesSum(root.right, currDepth+1, height);
+        deepestLeavesSum(root.left, currDepth+1);
+        deepestLeavesSum(root.right, currDepth+1);
     }
 
 }
