@@ -58,18 +58,17 @@ class Solution {
         int horizontalMovement = 0;
         int verticalMovement = 0;
         for(int i = 0; i < moves.length(); i++) {
-            switch (moves.charAt(i)) {
-                case 'L':
-                    horizontalMovement--;
-                    break;
-                case 'R':
-                    horizontalMovement++;
-                    break;
-                case 'U':
-                    verticalMovement++;
-                    break;
-                case 'D':
-                    verticalMovement--;
+            if(moves.charAt(i) == 'L') {
+                horizontalMovement--;
+            }
+            else if(moves.charAt(i) == 'R') {
+                horizontalMovement++;
+            }
+            else if(moves.charAt(i) == 'D') {
+                verticalMovement--;
+            }
+            else {
+                verticalMovement++;
             }
         }
 
