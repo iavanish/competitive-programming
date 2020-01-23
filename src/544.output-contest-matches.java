@@ -84,21 +84,21 @@ import java.util.StringJoiner;
 class Solution {
 
     public String findContestMatch(int n) {
-        String[] matches = new String[n];
+        List<String> matches = new ArrayList<>();
         for(int i = 1; i <= n; i++) {
-            matches[i-1] = String.valueOf(i);
+            matches.add(String.valueOf(i));
         }
 
         int last = n-1;
         while(0 < last) {
             int i = 0;
             for(int j = last; i < j; i++, j--) {
-                matches[i] = "(" + matches[i] + "," + matches[j] + ")";
+                matches.set(i, "(" + matches.get(i) + "," + matches.get(j) + ")");
             }
             last = i-1;
         }
 
-        return matches[0];
+        return matches.get(0);
     }
 
 }
