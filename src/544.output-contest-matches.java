@@ -83,27 +83,26 @@ import java.util.List;
 class Solution {
 
     public String findContestMatch(int n) {
-        List<String> matches = new ArrayList<>();
+        String[] matches = new String[n];
         for(int i = 1; i <= n; i++) {
-            matches.add(String.valueOf(i));
+            matches[i-1] = String.valueOf(i);
         }
 
-        int first = 0;
         int last = n-1;
-        while(first < last) {
-            for(int i = first, j = last; i < j; i++, j--) {
+        while(0 < last) {
+            int i = 0;
+            for(int j = last; i < j; i++, j--) {
                 StringBuilder temp = new StringBuilder("(");
-                temp.append(matches.get(i));
+                temp.append(matches[i]);
                 temp.append(",");
-                temp.append(matches.get(j));
+                temp.append(matches[j]);
                 temp.append(")");
-                matches.add(temp.toString());
+                matches[i] = temp.toString();
             }
-            first = last+1;
-            last = matches.size()-1;
+            last = i-1;
         }
 
-        return matches.get(first);
+        return matches[0];
     }
 
 }
