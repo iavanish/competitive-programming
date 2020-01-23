@@ -93,7 +93,12 @@ class Solution {
         while(0 < last) {
             int i = 0;
             for(int j = last; i < j; i++, j--) {
-                matches.set(i, "(" + matches.get(i) + "," + matches.get(j) + ")");
+                StringBuilder temp = new StringBuilder("(");
+                temp.append(matches.get(i));
+                temp.append(",");
+                temp.append(matches.get(j));
+                temp.append(")");
+                matches.set(i, temp.toString());
             }
             last = i-1;
         }
