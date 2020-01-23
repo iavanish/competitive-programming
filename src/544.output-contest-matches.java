@@ -88,20 +88,22 @@ class Solution {
             matches.add(String.valueOf(i));
         }
 
-        while(matches.size() > 1) {
-            List<String> nextMatches = new ArrayList<>();
-            for(int i = 0, j = matches.size()-1; i < j; i++, j--) {
+        int first = 0;
+        int last = n-1;
+        while(first < last) {
+            for(int i = first, j = last; i < j; i++, j--) {
                 StringBuilder temp = new StringBuilder("(");
                 temp.append(matches.get(i));
                 temp.append(",");
                 temp.append(matches.get(j));
                 temp.append(")");
-                nextMatches.add(temp.toString());
+                matches.add(temp.toString());
             }
-            matches = nextMatches;
+            first = last+1;
+            last = matches.size()-1;
         }
 
-        return matches.get(0);
+        return matches.get(first);
     }
 
 }
