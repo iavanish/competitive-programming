@@ -78,6 +78,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 // @lc code=start
 class Solution {
@@ -92,12 +93,7 @@ class Solution {
         while(0 < last) {
             int i = 0;
             for(int j = last; i < j; i++, j--) {
-                StringBuilder temp = new StringBuilder("(");
-                temp.append(matches[i]);
-                temp.append(",");
-                temp.append(matches[j]);
-                temp.append(")");
-                matches[i] = temp.toString();
+                matches[i] = "(" + matches[i] + "," + matches[j] + ")";
             }
             last = i-1;
         }
