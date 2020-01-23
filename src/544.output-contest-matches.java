@@ -76,34 +76,25 @@
  * 
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringJoiner;
-
 // @lc code=start
 class Solution {
 
     public String findContestMatch(int n) {
-        List<String> matches = new ArrayList<>();
+        String[] matches = new String[n];
         for(int i = 1; i <= n; i++) {
-            matches.add(String.valueOf(i));
+            matches[i-1] = String.valueOf(i);
         }
 
         int last = n-1;
         while(0 < last) {
             int i = 0;
             for(int j = last; i < j; i++, j--) {
-                StringBuilder temp = new StringBuilder("(");
-                temp.append(matches.get(i));
-                temp.append(",");
-                temp.append(matches.get(j));
-                temp.append(")");
-                matches.set(i, temp.toString());
+                matches[i] = (new StringBuilder("(").append(matches[i]).append(",").append(matches[j]).append(")")).toString();
             }
             last = i-1;
         }
 
-        return matches.get(0);
+        return matches[0];
     }
 
 }
