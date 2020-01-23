@@ -55,24 +55,22 @@
 class Solution {
 
     public boolean judgeCircle(String moves) {
-        int horizontalMovement = 0;
-        int verticalMovement = 0;
+        int l = 0;
+        int r = 0;
+        int u = 0;
         for(int i = 0; i < moves.length(); i++) {
             if(moves.charAt(i) == 'L') {
-                horizontalMovement--;
+                l++;
             }
             else if(moves.charAt(i) == 'R') {
-                horizontalMovement++;
+                r++;
             }
-            else if(moves.charAt(i) == 'D') {
-                verticalMovement--;
-            }
-            else {
-                verticalMovement++;
+            else if(moves.charAt(i) == 'U') {
+                u++;
             }
         }
 
-        return horizontalMovement == 0 && verticalMovement == 0;
+        return l == r && u == moves.length()-l-r-u;
     }
 
 }
