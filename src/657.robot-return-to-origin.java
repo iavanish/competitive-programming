@@ -55,27 +55,25 @@
 class Solution {
 
     public boolean judgeCircle(String moves) {
-        int l = 0;
-        int r = 0;
-        int u = 0;
-        int d = 0;
+        int horizontalMovement = 0;
+        int verticalMovement = 0;
         for(int i = 0; i < moves.length(); i++) {
             switch (moves.charAt(i)) {
                 case 'L':
-                    l++;
+                    horizontalMovement--;
                     break;
                 case 'R':
-                    r++;
+                    horizontalMovement++;
                     break;
                 case 'U':
-                    u++;
+                    verticalMovement++;
                     break;
                 case 'D':
-                    d++;
+                    verticalMovement--;
             }
         }
 
-        return l == r && u == d;
+        return horizontalMovement == 0 && verticalMovement == 0;
     }
 
 }
