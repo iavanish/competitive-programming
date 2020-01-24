@@ -101,6 +101,9 @@
 
 // @lc code=start
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -112,10 +115,10 @@
  */
 class FindElements {
 
-    private boolean[] completeBinaryTree;
+    private Set<Integer> nodes;
 
     public FindElements(TreeNode root) {
-        completeBinaryTree = new boolean[(int) Math.pow(2, 20) + 1];
+        nodes = new HashSet<>();
         fillTree(root, 0);
     }
 
@@ -123,13 +126,13 @@ class FindElements {
         if(root == null) {
             return;
         }
-        completeBinaryTree[node] = true;
+        nodes.add(node);
         fillTree(root.left, node * 2 + 1);
         fillTree(root.right, node * 2 + 2);
     }
     
     public boolean find(int target) {
-        return completeBinaryTree[target];
+        return nodes.contains(target);
     }
 
 }
