@@ -62,7 +62,6 @@ class Solution {
             }
         }
 
-
         return paths[n-1];
     }
 
