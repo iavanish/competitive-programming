@@ -58,21 +58,20 @@ class Solution {
         int[] dp = new int[n];
         Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = triangle.get(0).get(0);
+        int min = Integer.MAX_VALUE;
         for(int i = 1; i < m; i++) {
             int first = Integer.MAX_VALUE;
             int second = dp[0];
             for(int j = 0; j < triangle.get(i).size(); j++) {
                 dp[j] = triangle.get(i).get(j) + Math.min(first, second);
+                if(i == m-1) {
+                    min = Math.min(min, dp[j]);
+                }
                 first = second;
                 if(j < n-1) {
                     second = dp[j + 1];
                 }
             }
-        }
-
-        int min = dp[0];
-        for(int i = 1; i < n; i++) {
-            min = Math.min(min, dp[i]);
         }
 
         return min;
