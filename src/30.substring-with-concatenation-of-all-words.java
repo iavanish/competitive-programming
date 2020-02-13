@@ -60,7 +60,12 @@ class Solution {
 
         Map<String, Integer> wordMap = new HashMap<>();
         for(String w : words) {
-            wordMap.put(w, wordMap.getOrDefault(w, 0) + 1);
+            if(wordMap.containsKey(w)) {
+                wordMap.put(w, wordMap.get(w) + 1);
+            }
+            else {
+                wordMap.put(w, 1);
+            }
         }
 
         List<Integer> result = new ArrayList<>();
