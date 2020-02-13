@@ -17,12 +17,12 @@
  * same length. Find all starting indices of substring(s) in s that is a
  * concatenation of each word in words exactly once and without any intervening
  * characters.
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input:
  * ⁠ s = "barfoothefoobarman",
  * ⁠ words = ["foo","bar"]
@@ -30,22 +30,21 @@
  * Explanation: Substrings starting at index 0 and 9 are "barfoo" and "foobar"
  * respectively.
  * The output order does not matter, returning [9,0] is fine too.
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input:
  * ⁠ s = "wordgoodgoodgoodbestword",
  * ⁠ words = ["word","good","best","word"]
  * Output: []
- * 
- * 
+ *
+ *
  */
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,30 +58,21 @@ class Solution {
         }
         int m = words[0].length();
 
-        Map<String, Integer> wordMap = new LinkedHashMap<>();
+        Map<String, Integer> wordMap = new HashMap<>();
         for(String w : words) {
-            if(wordMap.containsKey(w)) {
-                wordMap.put(w, wordMap.get(w) + 1);
-            }
-            else {
-                wordMap.put(w, 1);
-            }
+            wordMap.put(w, wordMap.getOrDefault(w, 0) + 1);
         }
 
         List<Integer> result = new ArrayList<>();
         for(int i = 0; i + n*m <= s.length(); i++) {
-            Map<String, Integer> tempWordMap = new LinkedHashMap<>(wordMap);
             boolean flag = true;
+            Map<String, Integer> seenMap = new HashMap<>();
             for(int j = i; j < i + n*m; j += m) {
                 String substring = s.substring(j, j + m);
-                if(tempWordMap.containsKey(substring)) {
-                    int c = tempWordMap.get(substring);
-                    if(c == 1) {
-                        tempWordMap.remove(substring);
-                    }
-                    else {
-                        tempWordMap.put(substring, c-1);
-                    }
+                int wordCount = wordMap.getOrDefault(substring, 0);
+                int seenCount = seenMap.getOrDefault(substring, 0);
+                if(seenCount < wordCount) {
+                    seenMap.put(substring, seenCount + 1);
                 }
                 else {
                     flag = false;
