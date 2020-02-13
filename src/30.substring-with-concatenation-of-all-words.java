@@ -45,6 +45,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ class Solution {
         }
         int m = words[0].length();
 
-        Map<String, Integer> wordMap = new HashMap<>();
+        Map<String, Integer> wordMap = new LinkedHashMap<>();
         for(String w : words) {
             if(wordMap.containsKey(w)) {
                 wordMap.put(w, wordMap.get(w) + 1);
@@ -70,7 +71,7 @@ class Solution {
 
         List<Integer> result = new ArrayList<>();
         for(int i = 0; i + n*m <= s.length(); i++) {
-            Map<String, Integer> tempWordMap = new HashMap<>(wordMap);
+            Map<String, Integer> tempWordMap = new LinkedHashMap<>(wordMap);
             boolean flag = true;
             for(int j = i; j < i + n*m; j += m) {
                 String substring = s.substring(j, j + m);
