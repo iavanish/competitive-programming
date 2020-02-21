@@ -60,10 +60,11 @@ class Solution {
                 return true;
             }
             else if (nums[first] <= nums[middle] && nums[middle] <= nums[last]) {
-                if (nums[first] == target) {
+                if (nums[first] == target || nums[last] == target) {
                     return true;
                 }
                 first++;
+                last--;
             }
             else if (nums[first] <= nums[middle]) {
                 if (nums[first] <= target && target < nums[middle]) {
