@@ -59,15 +59,11 @@ class Solution {
                     return nums[first];
                 }
                 first++;
-                if (first != last) {
-                    last--;
-                }
+                last--;
             }
             else if (nums[middle] <= nums[first] && nums[middle] <= nums[last]) {
                 first++;
-                if (first != last) {
-                    last--;
-                }
+                last--;
             }
             else if (nums[first] <= nums[middle]) {
                 first = middle + 1;
