@@ -54,9 +54,6 @@ class Solution {
         if (nums.length == 1) {
             return 0;
         }
-        if (nums.length == 2) {
-            return nums[0] < nums[1] ? 1 : 0;
-        }
 
         int first = 0;
         int last = nums.length - 1;
