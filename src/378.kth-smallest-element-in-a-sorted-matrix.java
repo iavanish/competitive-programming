@@ -38,40 +38,32 @@
  * You may assume k is always valid, 1 ≤ k ≤ n^2.
  */
 
-import java.util.PriorityQueue;
-
 // @lc code=start
 class Solution {
 
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
-        PriorityQueue<Cell> priorityQueue = new PriorityQueue<>();
-        for (int i = 0; i < n; i++) {
-            priorityQueue.add(new Cell(0, i, matrix[0][i]));
-        }
-        for (int i = 0; i < k-1; i++) {
-            Cell cell = priorityQueue.poll();
-            if (cell.i != n-1) {
-                priorityQueue.add(new Cell(cell.i+1, cell.j, matrix[cell.i+1][cell.j]));
+        int start = matrix[0][0];
+        int end = matrix[n-1][n-1];
+        while (start < end) {
+            int middle = start + (end - start) / 2;
+            int count = 0;
+            int j = n-1;
+            for (int[] i : matrix) {
+                while (j >= 0 && i[j] > middle) {
+                    j--;
+                }
+                count += (j+1);
+            }
+            if (count < k) {
+                start = middle + 1;
+            }
+            else {
+                end = middle;
             }
         }
 
-        return priorityQueue.peek().val;
-    }
-
-    private static class Cell implements Comparable<Cell> {
-        public int i;
-        public int j;
-        public int val;
-        public Cell(int i, int j, int val) {
-            this.i = i;
-            this.j = j;
-            this.val = val;
-        }
-        @Override
-        public int compareTo(Cell cell) {
-            return this.val - cell.val;
-        }
+        return start;
     }
 
 }
