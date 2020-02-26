@@ -38,10 +38,6 @@
  * You may assume k is always valid, 1 ≤ k ≤ n^2.
  */
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
-
 // @lc code=start
 class Solution {
 
@@ -53,8 +49,8 @@ class Solution {
             int middle = start + (end - start) / 2;
             int count = 0;
             int j = n-1;
-            for (int i = 0; i < n; i++) {
-                while (j >= 0 && matrix[i][j] > middle) {
+            for (int[] i : matrix) {
+                while (j >= 0 && i[j] > middle) {
                     j--;
                 }
                 count += (j+1);
