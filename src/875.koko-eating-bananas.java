@@ -71,12 +71,15 @@
  * 
  */
 
+import java.util.Arrays;
+
 // @lc code=start
 class Solution {
 
     public int minEatingSpeed(int[] piles, int H) {
         int start = 1;
         int end = 0;
+        Arrays.sort(piles);
         for (int pile : piles) {
             end = Math.max(end, pile);
         }
@@ -94,9 +97,13 @@ class Solution {
     }
 
     private boolean canEat(int[] piles, int k, int H) {
-        for (int pile : piles) {
-            H -= (pile / k);
-            if (pile % k != 0) {
+        for (int i = piles.length-1; i >= 0; i--) {
+            if (piles[i] <= k) {
+                H -= (i+1);
+                return H >= 0;
+            }
+            H -= (piles[i] / k);
+            if (piles[i] % k != 0) {
                 H--;
             }
             if (H < 0) {
