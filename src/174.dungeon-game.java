@@ -96,21 +96,11 @@ class Solution {
         }
         int n = dungeon[0].length;
 
-
-        long start = 1;
-        long end = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (dungeon[i][j] < 0) {
-                    end += dungeon[i][j];
-                }
-            }
-        }
-        end = -1 * end + 1;
-        System.out.println(end);
+        int start = 1;
+        int end = Integer.MAX_VALUE;
         while (start < end) {
-            long middle = start + (end - start) / 2;
-            if (isPossible(dungeon, 0, 0, m, n, dungeon[0][0], middle, isVisited(m, n))) {
+            int middle = start + (end - start) / 2;
+            if (isPossible(dungeon, 0, 0, m, n, 0, middle, mem(m, n))) {
                 end = middle;
             }
             else {
@@ -118,21 +108,22 @@ class Solution {
             }
         }
 
-        return (int) start;
+        return start;
     }
 
-    private long[][] isVisited(int m, int n) {
-        long[][] isVisited = new long[m][n];
+    private int[][] mem(int m, int n) {
+        int[][] mem = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                isVisited[i][j] = Integer.MIN_VALUE;
+                mem[i][j] = Integer.MIN_VALUE;
             }
         }
-        return isVisited;
+        return mem;
     }
 
-    private boolean isPossible(int[][] dungean, int x, int y, int m, int n, long currValue, long t, long[][] isVisited) {
-        isVisited[x][y] = currValue;
+    private boolean isPossible(int[][] dungean, int x, int y, int m, int n, int currValue, int t, int[][] mem) {
+        currValue += dungean[x][y];
+        mem[x][y] = currValue;
         if (t + currValue <= 0) {
             return false;
         }
@@ -142,8 +133,8 @@ class Solution {
         for (int i = 0; i < 2; i++) {
             int tempX = x + this.x[i];
             int tempY = y + this.y[i];
-            if (tempX >= 0 && tempX < m && tempY >= 0 && tempY < n && isVisited[tempX][tempY] < currValue + dungean[tempX][tempY]) {
-                if (isPossible(dungean, tempX, tempY, m, n, currValue + dungean[tempX][tempY], t, isVisited)) {
+            if (tempX >= 0 && tempX < m && tempY >= 0 && tempY < n && mem[tempX][tempY] < currValue + dungean[tempX][tempY]) {
+                if (isPossible(dungean, tempX, tempY, m, n, currValue, t, mem)) {
                     return true;
                 }
             }
