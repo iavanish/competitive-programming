@@ -81,7 +81,7 @@
  * 
  */
 
-import java.util.TreeMap;
+import java.util.Arrays;
 
 // @lc code=start
 class Solution {
@@ -96,51 +96,25 @@ class Solution {
         }
         int n = dungeon[0].length;
 
-        int start = 1;
-        int end = Integer.MAX_VALUE;
-        int[][] mem = mem(m, n);
-        while (start < end) {
-            int middle = start + (end - start) / 2;
-            if (isPossible(dungeon, 0, 0, m, n, 0, middle, mem(m, n))) {
-                end = middle;
-            }
-            else {
-                start = middle + 1;
-            }
-        }
-
-        return start;
-    }
-
-    private int[][] mem(int m, int n) {
-        int[][] mem = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                mem[i][j] = Integer.MIN_VALUE;
-            }
-        }
-        return mem;
-    }
-
-    private boolean isPossible(int[][] dungean, int x, int y, int m, int n, int currValue, int t, int[][] mem) {
-        currValue += dungean[x][y];
-        mem[x][y] = currValue;
-        if (t + currValue <= 0) {
-            return false;
-        }
-        if (x == m-1 && y == n-1) {
-            return true;
-        }
-        for (int i = 0; i < 2; i++) {
-            int tempX = x + this.x[i];
-            int tempY = y + this.y[i];
-            if (tempX >= 0 && tempX < m && tempY >= 0 && tempY < n && mem[tempX][tempY] < currValue + dungean[tempX][tempY]) {
-                if (isPossible(dungean, tempX, tempY, m, n, currValue, t, mem)) {
-                    return true;
+        int[][] dp = new int[m][n];
+        for (int i = m-1; i >= 0; i--) {
+            for (int j = n-1; j >= 0; j--) {
+                if (i == m-1 && j == n-1) {
+                    dp[i][j] = Math.max(1, 1 - dungeon[i][j]);
+                }
+                else if (i == m-1) {
+                    dp[i][j] = Math.max(1, dp[i][j+1] - dungeon[i][j]);
+                }
+                else if (j == n-1) {
+                    dp[i][j] = Math.max(1, dp[i+1][j] - dungeon[i][j]);
+                }
+                else {
+                    dp[i][j] = Math.max(1, Math.min(dp[i+1][j], dp[i][j+1]) - dungeon[i][j]);
                 }
             }
         }
-        return false;
+
+        return dp[0][0];
     }
 
 }
