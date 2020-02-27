@@ -81,13 +81,8 @@
  * 
  */
 
-import java.util.Arrays;
-
 // @lc code=start
 class Solution {
-
-    private int[] x = {0, 1};
-    private int[] y = {1, 0};
 
     public int calculateMinimumHP(int[][] dungeon) {
         int m = dungeon.length;
