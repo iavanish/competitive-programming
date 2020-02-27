@@ -98,6 +98,7 @@ class Solution {
 
         int start = 1;
         int end = Integer.MAX_VALUE;
+        int[][] mem = mem(m, n);
         while (start < end) {
             int middle = start + (end - start) / 2;
             if (isPossible(dungeon, 0, 0, m, n, 0, middle, mem(m, n))) {
