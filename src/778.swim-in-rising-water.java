@@ -72,7 +72,6 @@ class Solution {
 
     public int swimInWater(int[][] grid) {
         int n = grid.length;
-        boolean[][] isVisited = new boolean[n][n];
         PriorityQueue<Cell> priorityQueue = new PriorityQueue<>();
         priorityQueue.add(new Cell(0, 0, grid[0][0]));
         int[] x = {-1, 0, 0, 1};
@@ -86,9 +85,9 @@ class Solution {
             for (int i = 0; i < 4; i++) {
                 int tempX = cell.i + x[i];
                 int tempY = cell.j + y[i];
-                if (tempX >= 0 && tempX < n && tempY >= 0 && tempY < n && !isVisited[tempX][tempY]) {
-                    isVisited[tempX][tempY] = true;
+                if (tempX >= 0 && tempX < n && tempY >= 0 && tempY < n && grid[tempX][tempY] > -1) {
                     priorityQueue.add(new Cell(tempX, tempY, Math.max(grid[tempX][tempY], cell.elevation)));
+                    grid[tempX][tempY] = -1;
                 }
             }
         }
