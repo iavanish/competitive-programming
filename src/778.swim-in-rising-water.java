@@ -65,47 +65,44 @@
  * 
  */
 
-import java.util.PriorityQueue;
-
 // @lc code=start
 class Solution {
 
+    private int[] x = {-1, 0, 0, 1};
+    private int[] y = {0, -1, 1, 0};
+
     public int swimInWater(int[][] grid) {
         int n = grid.length;
-        PriorityQueue<Cell> priorityQueue = new PriorityQueue<>();
-        priorityQueue.add(new Cell(0, 0, grid[0][0]));
-        int[] x = {-1, 0, 0, 1};
-        int[] y = {0, -1, 1, 0};
-
-        while (true) {
-            Cell cell = priorityQueue.poll();
-            if (cell.i == n-1 && cell.j == n-1) {
-                return cell.elevation;
+        int start = 0;
+        int end = n * n - 1;
+        while (start < end) {
+            int middle = start + (end - start) / 2;
+            if (grid[0][0] <= middle && isReachable(grid, new boolean[n][n], n, 0, 0, middle)) {
+                end = middle;
             }
-            for (int i = 0; i < 4; i++) {
-                int tempX = cell.i + x[i];
-                int tempY = cell.j + y[i];
-                if (tempX >= 0 && tempX < n && tempY >= 0 && tempY < n && grid[tempX][tempY] > -1) {
-                    priorityQueue.add(new Cell(tempX, tempY, Math.max(grid[tempX][tempY], cell.elevation)));
-                    grid[tempX][tempY] = -1;
+            else {
+                start = middle + 1;
+            }
+        }
+
+        return start;
+    }
+
+    private boolean isReachable(int[][] grid, boolean[][] isVisited, int n, int x, int y, int t) {
+        if (x == n-1 && y == n-1) {
+            return true;
+        }
+        for (int i = 0; i < 4; i++) {
+            int tempX = x + this.x[i];
+            int tempY = y + this.y[i];
+            if (tempX >= 0 && tempX < n && tempY >= 0 && tempY < n && !isVisited[tempX][tempY] && grid[tempX][tempY] <= t) {
+                isVisited[tempX][tempY] = true;
+                if (isReachable(grid, isVisited, n, tempX, tempY, t)) {
+                    return true;
                 }
             }
         }
-    }
-
-    private static class Cell implements Comparable<Cell> {
-        public int i;
-        public int j;
-        public int elevation;
-        public Cell(int i, int j, int elevation) {
-            this.i = i;
-            this.j = j;
-            this.elevation = elevation;
-        }
-        @Override
-        public int compareTo(Cell cell) {
-            return this.elevation - cell.elevation;
-        }
+        return false;
     }
 
 }
