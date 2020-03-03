@@ -48,51 +48,46 @@ class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
-        int mid = (n + m) % 2 == 0 ? (n + m) / 2 - 1 : (n + m) / 2;
+        int mid1 = (m + n) % 2 != 0 ? (m + n) / 2 : (m + n) / 2 - 1;
+        int mid2 = (m + n) / 2;
 
         if (n == 0) {
-            return m % 2 == 0 ? (nums1[mid] + nums1[mid+1]) / 2.0 : nums1[mid];
+            return (nums1[mid1] + nums1[mid2]) / 2.0;
         }
         if (m == 0) {
-            return n % 2 == 0 ? (nums2[mid] + nums2[mid+1]) / 2.0 : nums2[mid];
+            return (nums2[mid1] + nums2[mid2]) / 2.0;
         }
 
-        int median = binarySearch(nums1, nums2, m, n, mid);
-        if ((n + m) % 2 != 0) {
-            return median;
-        }
-        return (median + binarySearch(nums1, nums2, m, n, mid+1)) / 2.0;
+        int median1 = findNthElement(nums1, nums2, 0, m-1, 0, n-1, mid1);
+        int median2 = findNthElement(nums1, nums2, 0, m-1, 0, n-1, mid2);
+        return (median1 + median2) / 2.0;
     }
 
-    private int binarySearch(int[] nums1, int[] nums2, int m, int n, int mid) {
-        int first = Math.min(nums1[0], nums2[0]);
-        int last = Math.max(nums1[m-1], nums2[n-1]);
-        while (first < last) {
-            int middle = first + (last - first) / 2;
-            int pos1 = Arrays.binarySearch(nums1, middle);
-            int pos2 = Arrays.binarySearch(nums2, middle);
-            if (pos1 < 0) {
-                pos1 *= -1;
-                pos1--;
-            }
-            if (pos2 < 0) {
-                pos2 *= -1;
-                pos2--;
-            }
-            while (pos1 >= 0 && pos1 < m && nums1[pos1] == middle) {
-                pos1++;
-            }
-            while (pos2 >= 0 && pos2 < n && nums2[pos2] == middle) {
-                pos2++;
-            }
-            if (pos1 + pos2 <= mid) {
-                first = middle + 1;
-            }
-            else {
-                last = middle;
-            }
+    private int findNthElement(int[] nums1, int[] nums2, int i1, int j1, int i2, int j2, int n) {
+        if (j1 < i1) {
+            return nums2[i2 + n];
         }
-        return first;
+        if (j2 < i2) {
+            return nums1[i1 + n];
+        }
+
+        int pos1 = i1 + (j1 - i1) / 2;
+        int pos2 = Arrays.binarySearch(nums2, i2, j2+1, nums1[pos1]);
+        if (pos2 < 0) {
+            pos2 *= -1;
+            pos2 -= 2;
+        }
+        int i = (pos1 - i1) + (pos2 - i2) + 1;
+        if (i == n) {
+            return nums1[pos1];
+        }
+        if (i < n) {
+            return findNthElement(nums1, nums2, pos1+1, j1, pos2+1, j2, n-i-1);
+        }
+        if (pos2 < 0 || nums2[pos2] <= nums1[pos1]) {
+            return findNthElement(nums1, nums2, i1, pos1-1, i2, pos2, n);
+        }
+        return findNthElement(nums1, nums2, i1, pos1, i2, pos2-1, n);
     }
 
 }
