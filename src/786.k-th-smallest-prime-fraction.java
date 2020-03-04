@@ -41,45 +41,43 @@
  * 
  */
 
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
-
 // @lc code=start
 class Solution {
 
     public int[] kthSmallestPrimeFraction(int[] A, int K) {
         int n = A.length;
-        PriorityQueue<Pair> priorityQueue = new PriorityQueue<>();
-        for (int i = 1; i < n; i++) {
-            priorityQueue.add(new Pair(A, 0, i));
-        }
 
-        while (K-- > 1) {
-            Pair pair = priorityQueue.poll();
-            if (pair.numerator != pair.denominator-1) {
-                priorityQueue.add(new Pair(A, pair.numerator+1, pair.denominator));
+        int[] result = new int[2];
+        double start = 0f;
+        double end = 1f;
+        while (start < end - 1e-9) {
+            double middle = start + (end - start) / 2f;
+            int count = 0;
+            int i = -1;
+            int numerator = 0;
+            int denominator = A[0];
+            for (int j = 1; j < n; j++) {
+                while ((double) A[i+1] / (double) A[j] <= middle) {
+                    i++;
+                }
+                count += (i + 1);
+                if ((i >= 0) && ((double) numerator / (double) denominator <= (double) A[i] / (double) A[j])) {
+                    numerator = A[i];
+                    denominator = A[j];
+                }
+            }
+
+            if (count < K) {
+                start = middle;
+            }
+            else {
+                end = middle;
+                result[0] = numerator;
+                result[1] = denominator;
             }
         }
 
-        return new int[] {
-                A[priorityQueue.peek().numerator],
-                A[priorityQueue.peek().denominator]
-        };
-    }
-
-    private static class Pair implements Comparable<Pair> {
-        public int numerator;
-        public int denominator;
-        public Float value;
-        public Pair(int[] A, int numerator, int denominator) {
-            this.numerator = numerator;
-            this.denominator = denominator;
-            this.value = (float) A[numerator] / (float) A[denominator];
-        }
-        public int compareTo(Pair pair) {
-            return this.value.compareTo(pair.value);
-        }
+        return result;
     }
 
 }
