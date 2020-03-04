@@ -86,21 +86,22 @@ class Solution {
     public int shipWithinDays(int[] weights, int D) {
         int n = weights.length;
         int start = weights[0];
+        int end = weights[0];
         for (int i = 1; i < n; i++) {
             start = Math.max(start, weights[i]);
-            weights[i] += weights[i-1];
+            end += weights[i];
         }
 
-        int end = weights[n-1];
         while (start < end) {
             int middle = start + (end - start) / 2;
             int count = 1;
-            int prev = 0;
-            for (int i = 0; i < n; i++) {
-                if (weights[i] - prev > middle) {
-                    prev = weights[i-1];
+            int sum = weights[0];
+            for (int i = 1; i < n; i++) {
+                if (sum + weights[i] > middle) {
+                    sum = 0;
                     count++;
                 }
+                sum += weights[i];
             }
             if (count <= D) {
                 end = middle;
