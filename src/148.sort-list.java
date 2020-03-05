@@ -71,10 +71,18 @@ class Solution {
         if (l2 == null) {
             return l1;
         }
-        ListNode mergedList = null;
-        ListNode trav = null;
+        ListNode temp;
+        if (l1.val <= l2.val) {
+            temp = l1;
+            l1 = l1.next;
+        }
+        else {
+            temp = l2;
+            l2 = l2.next;
+        }
+        ListNode mergedList = temp;
+        ListNode trav = temp;
         while (l1 != null && l2 != null) {
-            ListNode temp;
             if (l1.val <= l2.val) {
                 temp = l1;
                 l1 = l1.next;
@@ -83,12 +91,7 @@ class Solution {
                 temp = l2;
                 l2 = l2.next;
             }
-            if (mergedList == null) {
-                mergedList = temp;
-            }
-            else {
-                trav.next = temp;
-            }
+            trav.next = temp;
             trav = temp;
         }
         if (l1 != null) {
