@@ -32,10 +32,7 @@
 
 // @lc code=start
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
 /**
  * Definition for singly-linked list.
@@ -66,8 +63,16 @@ class Solution {
     }
 
     private ListNode merge2Lists(ListNode l1, ListNode l2) {
-        ListNode mergedList = null;
-        ListNode trav = null;
+        ListNode mergedList;
+        if (l1.val <= l2.val) {
+            mergedList = l1;
+            l1 = l1.next;
+        }
+        else {
+            mergedList = l2;
+            l2 = l2.next;
+        }
+        ListNode trav = mergedList;
         while (l1 != null && l2 != null) {
             ListNode node;
             if (l1.val <= l2.val) {
@@ -78,12 +83,7 @@ class Solution {
                 node = l2;
                 l2 = l2.next;
             }
-            if (mergedList == null) {
-                mergedList = node;
-            }
-            else {
-                trav.next = node;
-            }
+            trav.next = node;
             trav = node;
         }
         if (l1 != null) {
