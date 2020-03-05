@@ -32,6 +32,9 @@
 
 // @lc code=start
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 /**
@@ -45,31 +48,51 @@ import java.util.PriorityQueue;
 class Solution {
 
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<ListNode>((l1, l2) -> l1.val - l2.val);
+        Queue<ListNode> queue = new LinkedList<>();
         for (ListNode node : lists) {
             if (node != null) {
-                priorityQueue.add(node);
+                queue.add(node);
             }
         }
 
-        ListNode head = null;
+        if (queue.isEmpty()) {
+            return null;
+        }
+
+        while (queue.size() > 1) {
+            queue.add(merge2Lists(queue.poll(), queue.poll()));
+        }
+        return queue.poll();
+    }
+
+    private ListNode merge2Lists(ListNode l1, ListNode l2) {
+        ListNode mergedList = null;
         ListNode trav = null;
-        while (!priorityQueue.isEmpty()) {
-            ListNode node = priorityQueue.poll();
-            if (node.next != null) {
-                priorityQueue.add(node.next);
+        while (l1 != null && l2 != null) {
+            ListNode node;
+            if (l1.val <= l2.val) {
+                node = l1;
+                l1 = l1.next;
             }
-            if (head == null) {
-                head = node;
-                trav = node;
+            else {
+                node = l2;
+                l2 = l2.next;
+            }
+            if (mergedList == null) {
+                mergedList = node;
             }
             else {
                 trav.next = node;
-                trav = trav.next;
             }
+            trav = node;
         }
-
-        return head;
+        if (l1 != null) {
+            trav.next = l1;
+        }
+        if (l2 != null) {
+            trav.next = l2;
+        }
+        return mergedList;
     }
 
 }
