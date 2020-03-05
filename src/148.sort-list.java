@@ -32,9 +32,6 @@
 
 // @lc code=start
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -49,19 +46,25 @@ class Solution {
         if (head == null || head.next == null) {
             return head;
         }
-
-        Queue<ListNode> queue = new LinkedList<>();
-        while (head != null) {
-            ListNode temp = head;
-            head = head.next;
-            temp.next = null;
-            queue.add(temp);
+        if (head.next.next == null) {
+            ListNode temp = head.next;
+            head.next = null;
+            return mergeLists(head, temp);
         }
 
-        while (queue.size() > 1) {
-            queue.add(mergeLists(queue.poll(), queue.poll()));
+        ListNode turtlePredecessor = null;
+        ListNode turtle = head;
+        ListNode rabbit = head.next;
+        while (rabbit != null && rabbit.next != null) {
+            turtlePredecessor = turtle;
+            turtle = turtle.next;
+            rabbit = rabbit.next.next;
         }
-        return queue.poll();
+
+        turtlePredecessor.next = null;
+        head = sortList(head);
+        turtle = sortList(turtle);
+        return mergeLists(head, turtle);
     }
 
     private ListNode mergeLists(ListNode l1, ListNode l2) {
