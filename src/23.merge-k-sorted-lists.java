@@ -57,20 +57,13 @@ class Solution {
             return null;
         }
 
-        ListNode result = null;
-        while (queue.size() > 0) {
-            result = merge2Lists(result, queue.poll());
+        while (queue.size() > 1) {
+            queue.add(merge2Lists(queue.poll(), queue.poll()));
         }
-        return result;
+        return queue.poll();
     }
 
     private ListNode merge2Lists(ListNode l1, ListNode l2) {
-        if (l1 == null) {
-            return l2;
-        }
-        if (l2 == null) {
-            return l1;
-        }
         ListNode mergedList = null;
         ListNode trav = null;
         while (l1 != null && l2 != null) {
