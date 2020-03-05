@@ -51,22 +51,22 @@ class Solution {
                 priorityQueue.add(node);
             }
         }
+        if (priorityQueue.isEmpty()) {
+            return null;
+        }
 
-        ListNode head = null;
-        ListNode trav = null;
+        ListNode head = priorityQueue.poll();
+        if (head.next != null) {
+            priorityQueue.add(head.next);
+        }
+        ListNode trav = head;
         while (!priorityQueue.isEmpty()) {
             ListNode node = priorityQueue.poll();
             if (node.next != null) {
                 priorityQueue.add(node.next);
             }
-            if (head == null) {
-                head = node;
-                trav = node;
-            }
-            else {
-                trav.next = node;
-                trav = trav.next;
-            }
+            trav.next = node;
+            trav = trav.next;
         }
 
         return head;
