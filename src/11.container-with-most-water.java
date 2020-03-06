@@ -43,9 +43,16 @@ class Solution {
 
     public int maxArea(int[] height) {
         int maxArea = 0;
-        for (int i = 0; i < height.length; i++) {
-            for (int j = i+1; j < height.length; j++) {
-                maxArea = Math.max(maxArea, (j-i) * Math.min(height[i], height[j]));
+        int start = 0;
+        int end = height.length-1;
+
+        while (start < end) {
+            maxArea = Math.max(maxArea, (end-start) * Math.min(height[start], height[end]));
+            if (height[start] < height[end]) {
+                start++;
+            }
+            else {
+                end--;
             }
         }
 
