@@ -73,15 +73,9 @@
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
 import java.util.Stack;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 // @lc code=start
 class Solution {
@@ -128,23 +122,17 @@ class Solution {
             }
         }
 
-        Map<String, Integer> map = new LinkedHashMap<>();
+        TreeMap<String, Integer> atoms = new TreeMap<>();
         while (!stack.empty()) {
             Atom atom = stack.pop();
-            map.put(atom.name, map.getOrDefault(atom.name, 0) + atom.value);
+            atoms.put(atom.name, atoms.getOrDefault(atom.name, 0) + atom.value);
         }
-
-        List<Atom> atoms = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            atoms.add(new Atom(entry.getKey(), entry.getValue()));
-        }
-        Collections.sort(atoms);
 
         StringBuilder result = new StringBuilder();
-        for (Atom atom : atoms) {
-            result.append(atom.name);
-            if (atom.value != 1) {
-                result.append(atom.value);
+        for (Map.Entry<String, Integer> entry : atoms.entrySet()) {
+            result.append(entry.getKey());
+            if (entry.getValue() != 1) {
+                result.append(entry.getValue());
             }
         }
 
@@ -159,16 +147,12 @@ class Solution {
         return substring.toString();
     }
 
-    private static class Atom implements Comparable<Atom> {
+    private static class Atom {
         public String name;
         public int value;
         public Atom(String name, int value) {
             this.name = name;
             this.value = value;
-        }
-        @Override
-        public int compareTo(Atom atom) {
-            return this.name.compareTo(atom.name);
         }
     }
 
