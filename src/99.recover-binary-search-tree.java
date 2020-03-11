@@ -69,7 +69,6 @@
 // @lc code=start
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -86,9 +85,18 @@ import java.util.Queue;
 class Solution {
 
     public void recoverTree(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new LinkedList<>();
         inorder(root, list);
-        Collections.sort(list);
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i) < list.get(i-1)) {
+                int j = i;
+                int node = list.get(j--);
+                while (j >= 0 && node < list.get(j)) {
+                    list.set(j+1, list.get(j--));
+                }
+                list.set(j+1, node);
+            }
+        }
 
         Queue<Integer> queue = new LinkedList<>(list);
         populateInorder(root, queue);
