@@ -1,126 +1,93 @@
 /*
- * @lc app=leetcode id=99 lang=java
- *
- * [99] Recover Binary Search Tree
- *
- * https://leetcode.com/problems/recover-binary-search-tree/description/
- *
- * algorithms
- * Hard (36.81%)
- * Likes:    1222
- * Dislikes: 66
- * Total Accepted:    146.7K
- * Total Submissions: 390.2K
- * Testcase Example:  '[1,3,null,null,2]'
- *
- * Two elements of a binary search tree (BST) are swapped by mistake.
- * 
- * Recover the tree without changing its structure.
- * 
- * Example 1:
- * 
- * 
- * Input: [1,3,null,null,2]
- * 
- * 1
- * /
- * 3
- * \
- * 2
- * 
- * Output: [3,1,null,null,2]
- * 
- * 3
- * /
- * 1
- * \
- * 2
- * 
- * 
- * Example 2:
- * 
- * 
- * Input: [3,1,4,null,null,2]
- * 
- * ⁠ 3
- * ⁠/ \
- * 1   4
- * /
- * 2
- * 
- * Output: [2,1,4,null,null,3]
- * 
- * ⁠ 2
- * ⁠/ \
- * 1   4
- * /
- * ⁠ 3
- * 
- * 
- * Follow up:
- * 
- * 
- * A solution using O(n) space is pretty straight forward.
- * Could you devise a constant space solution?
- * 
- * 
+ * https://leetcode.com/problems/recover-binary-search-tree/
  */
 
-// @lc code=start
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
+public class Solution {
 
     public void recoverTree(TreeNode root) {
-        List<Integer> preOrder = new ArrayList<>();
-        preOrder(root, preOrder);
-
-        int i = 0;
-        int j = preOrder.size()-1;
-        while (i < preOrder.size()-1 && preOrder.get(i) <= preOrder.get(i+1)) {
-            i++;
-        }
-        while (j > 0 && preOrder.get(j-1) <= preOrder.get(j)) {
-            j--;
-        }
-        int temp = preOrder.get(i);
-        preOrder.set(i, preOrder.get(j));
-        preOrder.set(j, temp);
-
-        populateTree(root, new LinkedList<>(preOrder));
-    }
-
-    private void preOrder(TreeNode root, List<Integer> preOrder) {
-        if (root == null) {
+        if(root == null) {
             return;
         }
-        preOrder(root.left, preOrder);
-        preOrder.add(root.val);
-        preOrder(root.right, preOrder);
-    }
-
-    private void populateTree(TreeNode root, Queue<Integer> preOrder) {
-        if (root == null) {
+        TreeNode left = max(root.left);
+        TreeNode right = min(root.right);
+        if(left != null && right != null && root.val < left.val && right.val < root.val) {
+            swap(left, right);
             return;
         }
-        populateTree(root.left, preOrder);
-        root.val = preOrder.remove();
-        populateTree(root.right, preOrder);
+        if(left != null && root.val < left.val) {
+            swap(root, left);
+            return;
+        }
+        if(right != null && right.val < root.val) {
+            swap(root, right);
+            return;
+        }
+        recoverTree(root.left);
+        recoverTree(root.right);
+    }
+
+    private TreeNode min(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+        TreeNode left = min(root.left);
+        TreeNode right = min(root.right);
+        if(left != null && right != null) {
+            if(left.val < root.val && left.val < right.val) {
+                return left;
+            }
+            else if(right.val < root.val && right.val < left.val) {
+                return right;
+            }
+            return root;
+        }
+        if(left != null) {
+            if(left.val < root.val) {
+                return left;
+            }
+            return root;
+        }
+        if(right != null) {
+            if(right.val < root.val) {
+                return right;
+            }
+        }
+        return root;
+    }
+
+    private TreeNode max(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+        TreeNode left = max(root.left);
+        TreeNode right = max(root.right);
+        if(left != null && right != null) {
+            if(left.val > root.val && left.val > right.val) {
+                return left;
+            }
+            else if(right.val > root.val && right.val > left.val) {
+                return right;
+            }
+            return root;
+        }
+        if(left != null) {
+            if(left.val > root.val) {
+                return left;
+            }
+            return root;
+        }
+        if(right != null) {
+            if(right.val > root.val) {
+                return right;
+            }
+        }
+        return root;
+    }
+
+    private void swap(TreeNode node1, TreeNode node2) {
+        int val = node1.val;
+        node1.val = node2.val;
+        node2.val = val;
     }
 
 }
-// @lc code=end
