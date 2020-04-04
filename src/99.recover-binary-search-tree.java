@@ -69,6 +69,7 @@
 // @lc code=start
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -85,39 +86,28 @@ import java.util.Queue;
 class Solution {
 
     public void recoverTree(TreeNode root) {
-        List<Integer> list = new LinkedList<>();
-        inorder(root, list);
-        for (int i = 1; i < list.size(); i++) {
-            if (list.get(i) < list.get(i-1)) {
-                int j = i;
-                int node = list.get(j--);
-                while (j >= 0 && node < list.get(j)) {
-                    list.set(j+1, list.get(j--));
-                }
-                list.set(j+1, node);
-            }
-        }
-
-        Queue<Integer> queue = new LinkedList<>(list);
-        populateInorder(root, queue);
+        List<Integer> preOrder = new ArrayList<>();
+        preOrder(root, preOrder);
+        Collections.sort(preOrder);
+        populateTree(root, new LinkedList<>(preOrder));
     }
 
-    private void populateInorder(TreeNode root, Queue<Integer> queue) {
+    private void preOrder(TreeNode root, List<Integer> preOrder) {
         if (root == null) {
             return;
         }
-        populateInorder(root.left, queue);
-        root.val = queue.poll();
-        populateInorder(root.right, queue);
+        preOrder(root.left, preOrder);
+        preOrder.add(root.val);
+        preOrder(root.right, preOrder);
     }
 
-    private void inorder(TreeNode root, List<Integer> list) {
+    private void populateTree(TreeNode root, Queue<Integer> preOrder) {
         if (root == null) {
             return;
         }
-        inorder(root.left, list);
-        list.add(root.val);
-        inorder(root.right, list);
+        populateTree(root.left, preOrder);
+        root.val = preOrder.remove();
+        populateTree(root.right, preOrder);
     }
 
 }
