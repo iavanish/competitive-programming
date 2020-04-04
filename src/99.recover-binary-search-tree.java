@@ -88,7 +88,19 @@ class Solution {
     public void recoverTree(TreeNode root) {
         List<Integer> preOrder = new ArrayList<>();
         preOrder(root, preOrder);
-        Collections.sort(preOrder);
+
+        int i = 0;
+        int j = preOrder.size()-1;
+        while (i < preOrder.size()-1 && preOrder.get(i) <= preOrder.get(i+1)) {
+            i++;
+        }
+        while (j > 0 && preOrder.get(j-1) <= preOrder.get(j)) {
+            j--;
+        }
+        int temp = preOrder.get(i);
+        preOrder.set(i, preOrder.get(j));
+        preOrder.set(j, temp);
+
         populateTree(root, new LinkedList<>(preOrder));
     }
 
