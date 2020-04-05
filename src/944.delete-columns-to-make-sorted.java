@@ -81,9 +81,6 @@ class Solution {
 
     public int minDeletionSize(String[] A) {
         int m = A.length;
-        if (m == 0) {
-            return 0;
-        }
         int n = A[0].length();
 
         int minDeletionSize = 0;
