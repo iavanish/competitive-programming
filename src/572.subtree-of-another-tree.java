@@ -75,28 +75,22 @@
 class Solution {
 
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null && t == null) {
-            return true;
-        }
-        else if (s == null ^ t == null) {
-            return false;
-        }
-        if (s.val == t.val) {
-            if (isSubtreeStartingHere(s, t)) {
-                return true;
-            }
-        }
-        return isSubtree(s.left, t) || isSubtree(s.right, t);
+        StringBuilder sPreOrder = new StringBuilder();
+        StringBuilder tPreOrder = new StringBuilder();
+        preOrder(s, sPreOrder);
+        preOrder(t, tPreOrder);
+        return sPreOrder.toString().contains(tPreOrder.toString());
     }
 
-    private boolean isSubtreeStartingHere(TreeNode s, TreeNode t) {
-        if (s == null && t == null) {
-            return true;
+    private void preOrder(TreeNode root, StringBuilder preOrder) {
+        if (root == null) {
+            preOrder.append("null");
         }
-        else if ((s == null ^ t == null) || (s.val != t.val)) {
-            return false;
+        else {
+            preOrder.append("#" + root.val);
+            preOrder(root.left, preOrder);
+            preOrder(root.right, preOrder);
         }
-        return isSubtreeStartingHere(s.left, t.left) && isSubtreeStartingHere(s.right, t.right);
     }
 
 }
