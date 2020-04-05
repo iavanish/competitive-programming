@@ -35,35 +35,22 @@
  *
  */
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 // @lc code=start
 class Solution {
 
     public int jump(int[] nums) {
         int n = nums.length;
-        Queue<Pair> queue = new LinkedList<>();
-        queue.add(new Pair(0, 0));
+        int[] minJump = new int[n];
+        minJump[0] = 0;
+        int window = 0;
         for (int i = 1; i < n; i++) {
-            while (queue.peek().index + nums[queue.peek().index] < i) {
-                queue.poll();
+            while (window + nums[window] < i) {
+                window++;
             }
-            queue.offer(new Pair(i, queue.peek().minJump + 1));
+            minJump[i] = minJump[window] + 1;
         }
-        while (queue.size() > 1) {
-            queue.poll();
-        }
-        return queue.poll().minJump;
-    }
 
-    private static class Pair {
-        public int index;
-        public int minJump;
-        public Pair(int index, int minJump) {
-            this.index = index;
-            this.minJump = minJump;
-        }
+        return minJump[n-1];
     }
 
 }
