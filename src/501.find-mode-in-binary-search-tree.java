@@ -52,9 +52,6 @@
 
 // @lc code=start
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -66,47 +63,69 @@ import java.util.List;
  */
 class Solution {
 
+    private Integer prevVal = null;
+    private int currCount = 0;
     private int modeCount = 0;
-    private List<Integer> modeValue = new ArrayList<>();
+    private int modes = 0;
+    private int[] modeValues;
 
     public int[] findMode(TreeNode root) {
-        modeCount = 0;
-        traverseTree(root);
-        int[] result = new int[modeValue.size()];
-        for (int i = 0; i < modeValue.size(); i++) {
-            result[i] = modeValue.get(i);
+        if (root == null) {
+            return new int[0];
         }
-        return result;
+        inOrder(root);
+        if (currCount == modeCount) {
+            modes++;
+        }
+        else if (modeCount < currCount) {
+            modeCount = currCount;
+            modes = 1;
+        }
+        modeValues = new int[modes];
+        prevVal = null;
+        currCount = 0;
+        modes = 0;
+        inOrder(root);
+        if (currCount == modeCount) {
+            if (modeValues != null) {
+                modeValues[modes] = prevVal;
+            }
+            modes++;
+        }
+        return modeValues;
     }
 
-    private void traverseTree(TreeNode root) {
+    private void processNode(TreeNode node) {
+        if (prevVal == null) {
+            prevVal = node.val;
+            currCount = 1;
+        }
+        else if (prevVal != node.val) {
+            if (currCount == modeCount) {
+                if (modeValues != null) {
+                    modeValues[modes] = prevVal;
+                }
+                modes++;
+            }
+            else if (modeCount < currCount) {
+                modeCount = currCount;
+                modes = 1;
+            }
+            prevVal = node.val;
+            currCount = 1;
+        }
+        else {
+            currCount++;
+        }
+    }
+
+    private void inOrder(TreeNode root) {
         if (root == null) {
             return;
         }
-        int countNodes = 1 + countNodes(root.left, root.val) + countNodes(root.right, root.val);
-        if (countNodes == modeCount) {
-            modeValue.add(root.val);
-        }
-        if (countNodes > modeCount) {
-            modeCount = countNodes;
-            modeValue = new ArrayList<>();
-            modeValue.add(root.val);
-        }
-        traverseTree(root.left);
-        traverseTree(root.right);
-    }
-
-    private int countNodes(TreeNode root, int value) {
-        if (root == null) {
-            return 0;
-        }
-        if (root.val < value) {
-            return countNodes(root.right, value);
-        }
-        if (root.val > value) {
-            return countNodes(root.left, value);
-        }
-        return 1 + countNodes(root.left, value) + countNodes(root.right, value);
+        inOrder(root.left);
+        processNode(root);
+        inOrder(root.right);
     }
 
 }
