@@ -59,7 +59,9 @@ class Solution {
         }
         List<Integer> result = new Stack<>();
         int[] segmentTree = new int[3 * (totalElements+1)];
-        for (int i = n-1; i >= 0; i--) {
+        result.add(0);
+        updateSegmentTree(segmentTree, 0, 0, totalElements, nums[n-1] + rebase);
+        for (int i = n-2; i >= 0; i--) {
             result.add(querySegmentTree(segmentTree, 0, 0, totalElements, 0, nums[i] + rebase - 1));
             updateSegmentTree(segmentTree, 0, 0, totalElements, nums[i] + rebase);
         }
