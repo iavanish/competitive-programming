@@ -44,33 +44,40 @@ class Solution {
             return s;
         }
 
-        boolean[][] isPalindrome = new boolean[n][n];
-        Arrays.fill(isPalindrome[0], true);
-        int longestPalindrome = 0;
-
-        for (int i = 1; i < n; i++) {
-            isPalindrome[1][i] = s.charAt(i-1) == s.charAt(i);
-            if (isPalindrome[1][i]) {
-                longestPalindrome = 1;
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < n; i++) {
+            int palLength1 = buildPalindrome(s, i, i);
+            int palLength2 = buildPalindrome(s, i, i+1);
+            if (palLength1 < palLength2) {
+                if (end - start + 1 < palLength2) {
+                    start = i - (palLength2 / 2 - 1);
+                    end = i + 1 + (palLength2 / 2 - 1);
+                }
             }
-        }
-
-        for (int i = 2; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                isPalindrome[i][j] = isPalindrome[i-2][j-1] && s.charAt(j-i) == s.charAt(j);
-                if (isPalindrome[i][j]) {
-                    longestPalindrome = i;
+            else {
+                if (end - start + 1 < palLength1) {
+                    start = i - (palLength1 / 2);
+                    end = i + (palLength1 / 2);
                 }
             }
         }
 
-        for (int i = longestPalindrome; i < n; i++) {
-            if (isPalindrome[longestPalindrome][i]) {
-                return s.substring(i-longestPalindrome, i+1);
-            }
-        }
+        return s.substring(start, end + 1);
+    }
 
-        return "";
+    private int buildPalindrome(String s, int left, int right) {
+        if (s.length() == right) {
+            return 0;
+        }
+        if (s.charAt(left) != s.charAt(right)) {
+            return 1;
+        }
+        while (0 < left && right < s.length()-1 && s.charAt(left-1) == s.charAt(right+1)) {
+            left--;
+            right++;
+        }
+        return right - left + 1;
     }
 
 }
