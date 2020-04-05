@@ -58,7 +58,7 @@ class Solution {
             rebase = -minElement;
         }
         List<Integer> result = new Stack<>();
-        int[] segmentTree = new int[4 * (totalElements+1)];
+        int[] segmentTree = new int[3 * (totalElements+1)];
         result.add(0);
         updateSegmentTree(segmentTree, 0, 0, totalElements, nums[n-1] + rebase);
         for (int i = n-2; i >= 0; i--) {
