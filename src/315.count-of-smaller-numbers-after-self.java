@@ -83,12 +83,10 @@ class Solution {
     }
 
     private void updateSegmentTree(int[] segmentTree, int node, int left, int right, int i) {
-        if (i < left || right < i) {
-        }
-        else if (left == right) {
+        if (left == right && left == i) {
             segmentTree[node]++;
         }
-        else {
+        else if (left <= i && i <= right) {
             int middle = calculateMiddle(left, right);
             updateSegmentTree(segmentTree, node * 2 + 1, left, middle, i);
             updateSegmentTree(segmentTree, node * 2 + 2, middle + 1, right, i);
