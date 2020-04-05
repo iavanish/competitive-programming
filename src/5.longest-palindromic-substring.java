@@ -33,30 +33,39 @@
  * 
  */
 
+import java.util.Arrays;
+
 // @lc code=start
 class Solution {
 
     public String longestPalindrome(String s) {
         int n = s.length();
-        int maxLengthPal = n;
-        for (int i = n; i > 0; i--) {
-            for (int j = 0; j+maxLengthPal-1 < n; j++) {
-                if (isPalindrome(s, j, j+maxLengthPal-1)) {
-                    return s.substring(j, j+maxLengthPal);
+        if (n == 0) {
+            return "";
+        }
+
+        boolean[][] isPalindrome = new boolean[n][n];
+        Arrays.fill(isPalindrome[0], true);
+
+        for (int i = 1; i < n; i++) {
+            isPalindrome[1][i] = s.charAt(i-1) == s.charAt(i);
+        }
+
+        for (int i = 2; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                isPalindrome[i][j] = isPalindrome[i-2][j-1] && s.charAt(j-i) == s.charAt(j);
+            }
+        }
+
+        for (int i = n-1; i >= 0; i--) {
+            for (int j = i; j < n; j++) {
+                if (isPalindrome[i][j]) {
+                    return s.substring(j-i, j+1);
                 }
             }
-            maxLengthPal--;
         }
-        return "";
-    }
 
-    private boolean isPalindrome(String s, int i, int j) {
-        while (i < j) {
-            if (s.charAt(i++) != s.charAt(j--)) {
-                return false;
-            }
-        }
-        return true;
+        return "";
     }
 
 }
