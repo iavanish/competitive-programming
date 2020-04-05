@@ -44,11 +44,11 @@ class Solution {
             return new ArrayList<>();
         }
 
-        int maxElement = nums[0];
         int minElement = nums[0];
+        int maxElement = nums[0];
         for (int i : nums) {
-            maxElement = Math.max(maxElement, i);
             minElement = Math.min(minElement, i);
+            maxElement = Math.max(maxElement, i);
         }
 
         int totalElements = maxElement;
@@ -58,20 +58,44 @@ class Solution {
             rebase = -minElement;
         }
         List<Integer> result = new Stack<>();
-        int[] count = new int[totalElements+1];
-        result.add(0);
-        count[nums[n-1] + rebase]++;
-        for (int i = n-2; i >= 0; i--) {
-            int temp = 0;
-            for (int j = 0; j < nums[i] + rebase; j++) {
-                temp += count[j];
-            }
-            result.add(temp);
-            count[nums[i] + rebase]++;
+        int[] segmentTree = new int[4 * (totalElements+1)];
+        for (int i = n-1; i >= 0; i--) {
+            result.add(querySegmentTree(segmentTree, 0, 0, totalElements, 0, nums[i] + rebase - 1));
+            updateSegmentTree(segmentTree, 0, 0, totalElements, nums[i] + rebase);
         }
 
         Collections.reverse(result);
         return result;
+    }
+
+    private int querySegmentTree(int[] segmentTree, int node, int left, int right, int i, int j) {
+        if (right < i || j < left || right < left) {
+            return 0;
+        }
+        else if (i <= left && right <= j) {
+            return segmentTree[node];
+        }
+        int middle = calculateMiddle(left, right);
+        return querySegmentTree(segmentTree, node * 2 + 1, left, middle, i, j) +
+                querySegmentTree(segmentTree, node * 2 + 2, middle + 1, right, i, j);
+    }
+
+    private void updateSegmentTree(int[] segmentTree, int node, int left, int right, int i) {
+        if (i < left || right < i) {
+        }
+        else if (left == right) {
+            segmentTree[node]++;
+        }
+        else {
+            int middle = calculateMiddle(left, right);
+            updateSegmentTree(segmentTree, node * 2 + 1, left, middle, i);
+            updateSegmentTree(segmentTree, node * 2 + 2, middle + 1, right, i);
+            segmentTree[node] = segmentTree[node * 2 + 1] + segmentTree[node * 2 + 2];
+        }
+    }
+
+    private int calculateMiddle(int left, int right) {
+        return left + (right - left) / 2;
     }
 
 }
