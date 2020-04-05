@@ -40,28 +40,33 @@ class Solution {
 
     public String longestPalindrome(String s) {
         int n = s.length();
-        if (n == 0) {
-            return "";
+        if (n <= 1) {
+            return s;
         }
 
         boolean[][] isPalindrome = new boolean[n][n];
         Arrays.fill(isPalindrome[0], true);
+        int longestPalindrome = 0;
 
         for (int i = 1; i < n; i++) {
             isPalindrome[1][i] = s.charAt(i-1) == s.charAt(i);
+            if (isPalindrome[1][i]) {
+                longestPalindrome = 1;
+            }
         }
 
         for (int i = 2; i < n; i++) {
             for (int j = i; j < n; j++) {
                 isPalindrome[i][j] = isPalindrome[i-2][j-1] && s.charAt(j-i) == s.charAt(j);
+                if (isPalindrome[i][j]) {
+                    longestPalindrome = i;
+                }
             }
         }
 
-        for (int i = n-1; i >= 0; i--) {
-            for (int j = i; j < n; j++) {
-                if (isPalindrome[i][j]) {
-                    return s.substring(j-i, j+1);
-                }
+        for (int i = longestPalindrome; i < n; i++) {
+            if (isPalindrome[longestPalindrome][i]) {
+                return s.substring(i-longestPalindrome, i+1);
             }
         }
 
