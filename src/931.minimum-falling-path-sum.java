@@ -61,14 +61,14 @@ class Solution {
 
         for (int i = 1; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                int minPath = A[i][j] + A[i-1][j];
+                int minPath = A[i-1][j];
                 if (j != 0) {
-                    minPath = Math.min(minPath, A[i][j] + A[i-1][j-1]);
+                    minPath = Math.min(minPath, A[i-1][j-1]);
                 }
                 if (j != n-1) {
-                    minPath = Math.min(minPath, A[i][j] + A[i-1][j+1]);
+                    minPath = Math.min(minPath, A[i-1][j+1]);
                 }
-                A[i][j] = minPath;
+                A[i][j] += minPath;
             }
         }
 
