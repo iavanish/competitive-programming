@@ -145,14 +145,14 @@ class Solution {
             return;
         }
         for (Node neighbor : node.neighbors) {
-            Node cloneNode = visitedMap.get(neighbor.val);
-            if (cloneNode == null) {
-                cloneNode = new Node(neighbor.val);
-            }
-            cloneGraph.neighbors.add(cloneNode);
             if (visitedMap.get(neighbor.val) == null) {
+                Node cloneNode = new Node(neighbor.val);
+                cloneGraph.neighbors.add(cloneNode);
                 visitedMap.set(neighbor.val, cloneNode);
                 cloneGraph(neighbor, cloneNode, visitedMap);
+            }
+            else {
+                cloneGraph.neighbors.add(visitedMap.get(neighbor.val));
             }
         }
     }
