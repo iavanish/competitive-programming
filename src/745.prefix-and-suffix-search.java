@@ -46,6 +46,7 @@
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -58,12 +59,10 @@ class WordFilter {
     public WordFilter(String[] words) {
         prefixTrie = new TrieNode();
         suffixTrie = new TrieNode();
-        for (int i = 0; i < words.length; i++) {
+        for (int i = words.length-1; i >= 0; i--) {
             TrieNode tempPrefix = prefixTrie;
             TrieNode tempSuffix = suffixTrie;
-            tempPrefix.sortedWeights.add(i);
             tempPrefix.weightSet.add(i);
-            tempSuffix.sortedWeights.add(i);
             tempSuffix.weightSet.add(i);
             for (int j = 0, k = words[i].length()-1; j < words[i].length(); j++, k--) {
                 tempPrefix = tempPrefix.addChild(words[i].charAt(j), i);
@@ -87,9 +86,9 @@ class WordFilter {
         if (tempSuffix == null) {
             return -1;
         }
-        for (int i = tempSuffix.sortedWeights.size()-1; i >= 0; i--) {
-            if (tempPrefix.weightSet.contains(tempSuffix.sortedWeights.get(i))) {
-                return tempSuffix.sortedWeights.get(i);
+        for (Integer i : tempPrefix.weightSet) {
+            if (tempSuffix.weightSet.contains(i)) {
+                return i;
             }
         }
         return -1;
@@ -97,18 +96,15 @@ class WordFilter {
 
     private static class TrieNode {
         private TrieNode[] children;
-        private List<Integer> sortedWeights;
         private Set<Integer> weightSet;
         public TrieNode() {
             children = new TrieNode[26];
-            sortedWeights = new ArrayList<>();
-            weightSet = new HashSet<>();
+            weightSet = new LinkedHashSet<>();
         }
         private TrieNode addChild(char c, int weight) {
             if (children[getKey(c)] == null) {
                 children[getKey(c)] = new TrieNode();
             }
-            children[getKey(c)].sortedWeights.add(weight);
             children[getKey(c)].weightSet.add(weight);
             return children[getKey(c)];
         }
