@@ -78,10 +78,13 @@ class WordFilter {
         for (int i = 0; i < prefix.length() && tempPrefix != null; i++) {
             tempPrefix = tempPrefix.getChild(prefix.charAt(i));
         }
+        if (tempPrefix == null) {
+            return -1;
+        }
         for (int i = suffix.length()-1; i >= 0 && tempSuffix != null; i--) {
             tempSuffix = tempSuffix.getChild(suffix.charAt(i));
         }
-        if (tempPrefix == null || tempSuffix == null) {
+        if (tempSuffix == null) {
             return -1;
         }
         for (int i = tempPrefix.sortedWeights.size()-1; i >= 0; i--) {
