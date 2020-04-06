@@ -87,9 +87,9 @@ class WordFilter {
         if (tempSuffix == null) {
             return -1;
         }
-        for (int i = tempPrefix.sortedWeights.size()-1; i >= 0; i--) {
-            if (tempSuffix.weightSet.contains(tempPrefix.sortedWeights.get(i))) {
-                return tempPrefix.sortedWeights.get(i);
+        for (int i = tempSuffix.sortedWeights.size()-1; i >= 0; i--) {
+            if (tempPrefix.weightSet.contains(tempSuffix.sortedWeights.get(i))) {
+                return tempSuffix.sortedWeights.get(i);
             }
         }
         return -1;
