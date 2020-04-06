@@ -66,9 +66,8 @@ class Solution {
             return minFallingPathSum;
         }
 
-        int minFallingPathSum = 0;
+        int minFallingPathSum = Integer.MAX_VALUE;
         for (int i = 1; i < m; i++) {
-            int tempMinFallingPathSum = Integer.MAX_VALUE;
             for (int j = 0; j < n; j++) {
                 int minPath = A[i-1][j];
                 if (j != 0) {
@@ -78,9 +77,10 @@ class Solution {
                     minPath = Math.min(minPath, A[i-1][j+1]);
                 }
                 A[i][j] += minPath;
-                tempMinFallingPathSum = Math.min(tempMinFallingPathSum, A[i][j]);
+                if (i == m-1) {
+                    minFallingPathSum = Math.min(minFallingPathSum, A[i][j]);
+                }
             }
-            minFallingPathSum = tempMinFallingPathSum;
         }
 
         return minFallingPathSum;
