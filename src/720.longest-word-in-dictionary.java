@@ -67,9 +67,6 @@ class Solution {
 
         String longestWord = "";
         for (String w : words) {
-            if (w.length() < longestWord.length()) {
-                continue;
-            }
             TrieNode temp = trie;
             boolean allPrefixesPresent = true;
             for (int i = 0; i < w.length()-1 && allPrefixesPresent; i++) {
