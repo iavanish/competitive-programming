@@ -36,19 +36,14 @@ class Solution {
 
     public int numSquares(int n) {
         int[] numSquares = new int[n+1];
-        numSquares[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            int sqrt = (int) Math.sqrt(i);
-            if (sqrt * sqrt == i) {
-                numSquares[i] = 1;
-            }
-            else {
-                numSquares[i] = Integer.MAX_VALUE;
-                for (int j = 1; j < i/2+1; j++) {
-                    numSquares[i] = Math.min(numSquares[i], numSquares[j] + numSquares[i-j]);
-                }
+        numSquares[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            numSquares[i] = i;
+            for (int j = 0; j * j <= i; j++) {
+                numSquares[i] = Math.min(numSquares[i], numSquares[i-j*j] + 1);
             }
         }
+
         return numSquares[n];
     }
 
