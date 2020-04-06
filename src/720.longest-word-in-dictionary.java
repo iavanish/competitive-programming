@@ -55,16 +55,26 @@ import java.util.Set;
 class Solution {
 
     public String longestWord(String[] words) {
-        Set<String> dictionary = new HashSet<>();
+        TrieNode trie = new TrieNode();
+
         for (String w : words) {
-            dictionary.add(w);
+            TrieNode temp = trie;
+            for (int i = 0; i < w.length(); i++) {
+                temp = temp.addChild(w.charAt(i));
+            }
+            temp.isLeaf = true;
         }
 
         String longestWord = "";
         for (String w : words) {
+            if (w.length() < longestWord.length()) {
+                continue;
+            }
+            TrieNode temp = trie;
             boolean allPrefixesPresent = true;
-            for (int i = 1; i < w.length() && allPrefixesPresent; i++) {
-                if (!dictionary.contains(w.substring(0, i))) {
+            for (int i = 0; i < w.length()-1 && allPrefixesPresent; i++) {
+                temp = temp.getChild(w.charAt(i));
+                if (temp == null || temp.count == 1 || !temp.isLeaf) {
                     allPrefixesPresent = false;
                 }
             }
@@ -74,6 +84,30 @@ class Solution {
         }
 
         return longestWord;
+    }
+
+    private static class TrieNode {
+        public TrieNode[] children;
+        public int count;
+        public boolean isLeaf;
+        public TrieNode() {
+            children = new TrieNode[26];
+            count = 0;
+            isLeaf = false;
+        }
+        private TrieNode addChild(char c) {
+            if (getChild(c) == null) {
+                children[getKey(c)] = new TrieNode();
+            }
+            children[getKey(c)].count++;
+            return children[getKey(c)];
+        }
+        private TrieNode getChild(char c) {
+            return children[getKey(c)];
+        }
+        private int getKey(char c) {
+            return c - 'a';
+        }
     }
 
 }
