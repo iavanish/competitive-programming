@@ -54,7 +54,6 @@ import java.util.Arrays;
 class Solution {
 
     public String longestWord(String[] words) {
-        Arrays.sort(words);
         TrieNode trie = new TrieNode();
 
         for (String w : words) {
@@ -75,7 +74,7 @@ class Solution {
                     allPrefixesPresent = false;
                 }
             }
-            if (allPrefixesPresent && (longestWord.length() < w.length())) {
+            if (allPrefixesPresent && (longestWord.length() < w.length() || (longestWord.length() == w.length() && w.compareTo(longestWord) < 0))) {
                 longestWord = w;
             }
         }
