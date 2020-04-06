@@ -140,9 +140,9 @@ class Solution {
         return reports
                 .stream()
                 .collect(Collectors.groupingBy(Report::getX))
-                .entrySet()
+                .values()
                 .stream()
-                .map(entry -> entry.getValue()
+                .map(reportList -> reportList
                         .stream()
                         .map(Report::getVal)
                         .collect(Collectors.toList()))
