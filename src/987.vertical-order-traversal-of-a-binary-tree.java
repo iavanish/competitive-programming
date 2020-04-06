@@ -84,9 +84,9 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.PriorityQueue;
 
 /**
  * Definition for a binary tree node.
@@ -110,7 +110,15 @@ class Solution {
         traverseTree(root, 0);
         xStart = -xStart;
 
-        List<Report> reports = new ArrayList<>();
+        PriorityQueue<Report> reports = new PriorityQueue<>((r1, r2) -> {
+            if (r1.x != r2.x) {
+                return r1.x - r2.x;
+            }
+            else if (r1.y != r2.y) {
+                return r1.y - r2.y;
+            }
+            return r1.val - r2.val;
+        });
         List<Pair> levelOrderNodes = Arrays.asList(new Pair(root, xStart));
         int y = 0;
         while (!levelOrderNodes.isEmpty()) {
@@ -128,18 +136,9 @@ class Solution {
             y++;
         }
 
-        reports.sort((r1, r2) -> {
-            if (r1.x != r2.x) {
-                return r1.x - r2.x;
-            }
-            else if (r1.y != r2.y) {
-                return r1.y - r2.y;
-            }
-            return r1.val - r2.val;
-        });
-
         List<List<Integer>> verticalTraversal = new ArrayList<>();
-        for (Report report : reports) {
+        while (!reports.isEmpty()) {
+            Report report = reports.poll();
             if (report.x == verticalTraversal.size()) {
                 verticalTraversal.add(new ArrayList<>());
             }
@@ -167,10 +166,6 @@ class Solution {
     }
 
     private static class Report {
-        public int getX() {
-            return x;
-        }
-
         public int x;
         public int y;
         public int val;
