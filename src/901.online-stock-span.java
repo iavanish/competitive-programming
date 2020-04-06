@@ -64,27 +64,31 @@
  * 
  */
 
-import java.util.Stack;
-
 // @lc code=start
 class StockSpanner {
 
-    private Stack<Integer> prices;
-    private Stack<Integer> spans;
+    /*
+     * Optimizing stack to see if this is the expected solution
+     * if (beats 100% solutions) then (this solution is the expected solution)
+     */
+    private int[] pricesStack;
+    private int[] spansStack;
+    private int top;
 
     public StockSpanner() {
-        prices = new Stack<>();
-        spans = new Stack<>();
+        pricesStack = new int[10000];
+        spansStack = new int[10000];
+        top = -1;
     }
     
     public int next(int price) {
         int span = 1;
-        while (!prices.empty() && prices.peek() <= price) {
-            prices.pop();
-            span += spans.pop();
+        while (0 <= top && pricesStack[top] <= price) {
+            span += spansStack[top--];
         }
-        prices.push(price);
-        spans.push(span);
+        top++;
+        pricesStack[top] = price;
+        spansStack[top] = span;
         return span;
     }
 
