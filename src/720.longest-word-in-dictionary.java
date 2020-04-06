@@ -48,9 +48,6 @@
  * 
  */
 
-import java.util.HashSet;
-import java.util.Set;
-
 // @lc code=start
 class Solution {
 
@@ -87,10 +84,10 @@ class Solution {
     }
 
     private static class TrieNode {
-        public TrieNode[] children;
-        public int count;
-        public boolean isLeaf;
-        public TrieNode() {
+        private TrieNode[] children;
+        private int count;
+        private boolean isLeaf;
+        private TrieNode() {
             children = new TrieNode[26];
             count = 0;
             isLeaf = false;
