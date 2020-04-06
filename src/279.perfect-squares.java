@@ -39,7 +39,7 @@ class Solution {
         numSquares[0] = 0;
         for (int i = 1; i <= n; i++) {
             numSquares[i] = i;
-            for (int j = 0; j * j <= i; j++) {
+            for (int j = 0; j * j <= i && numSquares[i] > 1; j++) {
                 numSquares[i] = Math.min(numSquares[i], numSquares[i-j*j] + 1);
             }
         }
