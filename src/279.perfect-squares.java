@@ -44,7 +44,7 @@ class Solution {
             }
             else {
                 numSquares[i] = Integer.MAX_VALUE;
-                for (int j = 1; j < i; j++) {
+                for (int j = 1; j < i/2+1; j++) {
                     numSquares[i] = Math.min(numSquares[i], numSquares[j] + numSquares[i-j]);
                 }
             }
