@@ -86,8 +86,6 @@ class Node {
 }
 */
 
-import java.util.HashMap;
-
 class Solution {
 
     public Node copyRandomList(Node head) {
@@ -95,27 +93,34 @@ class Solution {
             return null;
         }
 
-        Map<Node, Node> map = new HashMap<>();
-        Node copy = copyRandomList(head, map);
-        Node temp = head;
-        while (temp != null) {
-            if (temp.random != null) {
-                map.get(temp).random = map.get(temp.random);
+        Node copy = head;
+        while (copy != null) {
+            Node temp = new Node(copy.val);
+            temp.next = copy.next;
+            copy.next = temp;
+            copy = temp.next;
+        }
+
+        copy = head;
+        while (copy != null) {
+            if (copy.random != null) {
+                copy.next.random = copy.random.next;
             }
-            temp = temp.next;
+            copy = copy.next.next;
         }
 
-        return copy;
-    }
-
-    private Node copyRandomList(Node head, Map<Node, Node> map) {
-        if (head == null) {
-            return null;
+        copy = head;
+        Node result = copy.next;
+        while (copy != null) {
+            Node temp = copy.next;
+            copy.next = temp.next;
+            if (temp.next != null) {
+                temp.next = temp.next.next;
+            }
+            copy = copy.next;
         }
-        Node temp = new Node(head.val);
-        map.put(head, temp);
-        temp.next = copyRandomList(head.next, map);
-        return temp;
+
+        return result;
     }
 
 }
