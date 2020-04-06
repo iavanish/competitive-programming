@@ -44,10 +44,7 @@
  * 
  */
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 // @lc code=start
@@ -62,8 +59,8 @@ class WordFilter {
         for (int i = words.length-1; i >= 0; i--) {
             TrieNode tempPrefix = prefixTrie;
             TrieNode tempSuffix = suffixTrie;
-            tempPrefix.weightSet.add(i);
-            tempSuffix.weightSet.add(i);
+            tempPrefix.sortedWeightSet.add(i);
+            tempSuffix.sortedWeightSet.add(i);
             for (int j = 0, k = words[i].length()-1; j < words[i].length(); j++, k--) {
                 tempPrefix = tempPrefix.addChild(words[i].charAt(j), i);
                 tempSuffix = tempSuffix.addChild(words[i].charAt(k), i);
@@ -86,8 +83,8 @@ class WordFilter {
         if (tempSuffix == null) {
             return -1;
         }
-        for (Integer i : tempPrefix.weightSet) {
-            if (tempSuffix.weightSet.contains(i)) {
+        for (Integer i : tempPrefix.sortedWeightSet) {
+            if (tempSuffix.sortedWeightSet.contains(i)) {
                 return i;
             }
         }
@@ -96,16 +93,16 @@ class WordFilter {
 
     private static class TrieNode {
         private TrieNode[] children;
-        private Set<Integer> weightSet;
+        private Set<Integer> sortedWeightSet;
         public TrieNode() {
             children = new TrieNode[26];
-            weightSet = new LinkedHashSet<>();
+            sortedWeightSet = new LinkedHashSet<>();
         }
         private TrieNode addChild(char c, int weight) {
             if (children[getKey(c)] == null) {
                 children[getKey(c)] = new TrieNode();
             }
-            children[getKey(c)].weightSet.add(weight);
+            children[getKey(c)].sortedWeightSet.add(weight);
             return children[getKey(c)];
         }
         private TrieNode getChild(char c) {
