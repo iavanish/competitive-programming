@@ -46,6 +46,10 @@
  */
 
 // @lc code=start
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -61,16 +65,22 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        return pathSumRecursively(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        return pathSum(root, sum, 0, map);
     }
 
-    private int pathSumRecursively(TreeNode root, int sum) {
+    private int pathSum(TreeNode root, int sum, int currentSum, Map<Integer, Integer> map) {
         if (root == null) {
             return 0;
         }
-        return (root.val == sum ? 1 : 0) +
-                pathSumRecursively(root.left, sum-root.val) +
-                pathSumRecursively(root.right, sum-root.val);
+        currentSum += root.val;
+        int pathSum = map.getOrDefault(currentSum-sum, 0);
+        int prevValue = map.getOrDefault(currentSum, 0);
+        map.put(currentSum, prevValue+1);
+        pathSum += (pathSum(root.left, sum, currentSum, map) + pathSum(root.right, sum, currentSum, map));
+        map.put(currentSum, prevValue);
+        return pathSum;
     }
 
 }
