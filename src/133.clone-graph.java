@@ -121,7 +121,7 @@ class Node {
 }
 */
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 class Solution {
 
@@ -130,22 +130,28 @@ class Solution {
             return null;
         }
 
-        Map<Integer, Node> visitedMap = new HashMap<>();
+        List<Node> visitedMap = new ArrayList<>();
+        for (int i = 0; i < 101; i++) {
+            visitedMap.add(null);
+        }
         Node cloneGraph = new Node(node.val);
-        visitedMap.put(node.val, cloneGraph);
+        visitedMap.set(node.val, cloneGraph);
         cloneGraph(node, cloneGraph, visitedMap);
         return cloneGraph;
     }
 
-    private void cloneGraph(Node node, Node cloneGraph, Map<Integer, Node> visitedMap) {
+    private void cloneGraph(Node node, Node cloneGraph, List<Node> visitedMap) {
         if (node == null) {
             return;
         }
         for (Node neighbor : node.neighbors) {
-            Node cloneNode = visitedMap.getOrDefault(neighbor.val, new Node(neighbor.val));
+            Node cloneNode = visitedMap.get(neighbor.val);
+            if (cloneNode == null) {
+                cloneNode = new Node(neighbor.val);
+            }
             cloneGraph.neighbors.add(cloneNode);
-            if (!visitedMap.containsKey(neighbor.val)) {
-                visitedMap.put(neighbor.val, cloneNode);
+            if (visitedMap.get(neighbor.val) == null) {
+                visitedMap.set(neighbor.val, cloneNode);
                 cloneGraph(neighbor, cloneNode, visitedMap);
             }
         }
