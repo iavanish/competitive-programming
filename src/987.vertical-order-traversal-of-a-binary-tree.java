@@ -84,9 +84,8 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 /**
  * Definition for a binary tree node.
@@ -110,15 +109,7 @@ class Solution {
         traverseTree(root, 0);
         xStart = -xStart;
 
-        PriorityQueue<Report> reports = new PriorityQueue<>((r1, r2) -> {
-            if (r1.x != r2.x) {
-                return r1.x - r2.x;
-            }
-            else if (r1.y != r2.y) {
-                return r1.y - r2.y;
-            }
-            return r1.val - r2.val;
-        });
+        List<Report> reports = new ArrayList<>();
         List<Pair> levelOrderNodes = Arrays.asList(new Pair(root, xStart));
         int y = 0;
         while (!levelOrderNodes.isEmpty()) {
@@ -136,15 +127,26 @@ class Solution {
             y++;
         }
 
-        List<List<Integer>> verticalTraversal = new ArrayList<>();
-        while (!reports.isEmpty()) {
-            Report report = reports.poll();
-            if (report.x == verticalTraversal.size()) {
-                verticalTraversal.add(new ArrayList<>());
+        reports.sort((r1, r2) -> {
+            if (r1.x != r2.x) {
+                return r1.x - r2.x;
             }
-            verticalTraversal.get(report.x).add(report.val);
-        }
-        return verticalTraversal;
+            else if (r1.y != r2.y) {
+                return r1.y - r2.y;
+            }
+            return r1.val - r2.val;
+        });
+
+        return reports
+                .stream()
+                .collect(Collectors.groupingBy(Report::getX))
+                .entrySet()
+                .stream()
+                .map(entry -> entry.getValue()
+                        .stream()
+                        .map(Report::getVal)
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
     private void traverseTree(TreeNode root, int currX) {
@@ -173,6 +175,12 @@ class Solution {
             this.x = x;
             this.y = y;
             this.val = val;
+        }
+        public int getX() {
+            return x;
+        }
+        public int getVal() {
+            return val;
         }
     }
 
