@@ -99,7 +99,7 @@ class Solution {
     private int findParent(int[] parent, int i) {
         while (parent[i] != i) {
             parent[i] = parent[parent[i]];
-            i = parent[i];
+            i = parent[parent[i]];
         }
         return i;
     }
