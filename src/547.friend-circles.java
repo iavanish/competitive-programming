@@ -107,7 +107,7 @@ class Solution {
         if (parentI == parentJ) {
             return;
         }
-        if (size[parentI] < size[parentJ]) {
+        if (size[parentI] > size[parentJ]) {
             parent[parentI] = parentJ;
             size[parentJ] += size[parentI];
         }
