@@ -87,11 +87,13 @@ class Solution {
             }
         }
 
-        Set<Integer> components = new HashSet<>();
+        int noOfComponents = 0;
         for (int i = 0; i < n; i++) {
-            components.add(findParent(parent, i));
+            if (i == parent[i]) {
+                noOfComponents++;
+            }
         }
-        return components.size();
+        return noOfComponents;
     }
 
     private int findParent(int[] parent, int i) {
