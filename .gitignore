@@ -23,7 +23,7 @@
 hs_err_pid*
 
 #IDE
-.idea/*
+**/.idea/*
 !.idea/codeStyles/
 !.idea/runConfigurations/
 !.idea/inspectionProfiles/
