@@ -31,3 +31,12 @@ hs_err_pid*
 
 #Java
 **/target
+**/output
+**/.tcjson
+**/CheckerClass.template
+**/chelper.properties
+**/CHelperReport.txt
+**/TaskClass.template
+**/TestCaseClass.template
+**/TopCoderTaskClass.template
+**/TopCoderTestCaseClass.template
