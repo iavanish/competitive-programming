@@ -86,11 +86,11 @@ class Solution {
         return maxConstrainedSubsetSum;
     }
 
-    public void update(int i, int val) {
+    private void update(int i, int val) {
         updateTree(segmentTree, 0, 0, n-1, i, val);
     }
 
-    public int maxRange(int i, int j) {
+    private int maxRange(int i, int j) {
         return queryTree(segmentTree, 0, 0, n-1, i, j);
     }
 
