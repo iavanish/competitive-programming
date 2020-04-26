@@ -1,0 +1,34 @@
+{
+  "name" : "A. Level Statistics",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "6\n3\n0 0\n1 1\n1 2\n2\n1 0\n1000 3\n4\n10 1\n15 2\n10 2\n15 2\n1\n765 432\n2\n4 4\n4 3\n5\n0 0\n1 0\n1 0\n1 0\n1 0\n",
+    "output" : "NO\nYES\nNO\nYES\nNO\nYES\n",
+    "index" : 0,
+    "active" : true
+  } ],
+  "location" : "src/educational_round_85",
+  "vmArgs" : "-Xmx256M",
+  "mainClass" : "Main",
+  "taskClass" : "educational_round_85.ALevelStatistics",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.04.26",
+  "contestName" : "Codeforces - Educational Codeforces Round 85 (Rated for Div. 2)",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

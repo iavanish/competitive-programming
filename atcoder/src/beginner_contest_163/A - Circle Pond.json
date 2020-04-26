@@ -1,0 +1,39 @@
+{
+  "name" : "A - Circle Pond",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "1\n",
+    "output" : "6.28318530717958623200\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "73\n",
+    "output" : "458.67252742410977361942\n",
+    "index" : 1,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_163",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_163.ACirclePond",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.04.26",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 163",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

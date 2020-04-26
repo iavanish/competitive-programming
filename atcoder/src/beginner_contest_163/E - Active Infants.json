@@ -1,0 +1,44 @@
+{
+  "name" : "E - Active Infants",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "4\n1 3 4 2\n",
+    "output" : "20\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "6\n5 5 6 1 1 1\n",
+    "output" : "58\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "6\n8 6 9 1 2 1\n",
+    "output" : "85\n",
+    "index" : 2,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_163",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_163.EActiveInfants",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.04.26",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 163",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
