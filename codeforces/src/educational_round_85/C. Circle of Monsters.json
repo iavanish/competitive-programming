@@ -1,0 +1,34 @@
+{
+  "name" : "C. Circle of Monsters",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "1\n3\n7 15\n2 14\n5 3\n",
+    "output" : "6\n",
+    "index" : 0,
+    "active" : true
+  } ],
+  "location" : "src/educational_round_85",
+  "vmArgs" : "-Xmx256M",
+  "mainClass" : "Main",
+  "taskClass" : "educational_round_85.CCircleOfMonsters",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.01",
+  "contestName" : "Codeforces - Educational Codeforces Round 85 (Rated for Div. 2)",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
