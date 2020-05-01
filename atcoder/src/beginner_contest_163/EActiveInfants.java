@@ -8,43 +8,33 @@ public class EActiveInfants {
 
     public void solve(int testNumber, FastReader in, PrintWriter out) {
         int n = in.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = in.nextInt();
+        Infant[] a = new Infant[n+1];
+        a[0] = new Infant(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        for (int i = 1; i <= n; i++) {
+            a[i] = new Infant(in.nextLong(), i);
         }
 
-        int x = 0;
-        int y = n-1;
-        int happiness = 0;
-        while (x <= y) {
-            int firstMax = -1;
-            int firstMaxIndex = -1;
-            int lastMax = -1;
-            int lastMaxIndex = -1;
-            for (int i = 0; i < n; i++) {
-                if (firstMax < a[i]) {
-                    firstMax = a[i];
-                    firstMaxIndex = i;
-                }
-                if (lastMax <= a[i]) {
-                    lastMax = a[i];
-                    lastMaxIndex = i;
-                }
-            }
+        /*
+         *  ToDo
+         *  Can't even understand the editorial right now :(
+         */
+    }
 
-            if (Math.abs(y - lastMaxIndex) < Math.abs(x - firstMaxIndex)) {
-                a[firstMaxIndex] = -1;
-                happiness += (firstMax * Math.abs(x - firstMaxIndex));
-                x++;
-            }
-            else {
-                a[lastMaxIndex] = -1;
-                happiness += (lastMax * Math.abs(y - lastMaxIndex));
-                y--;
-            }
+    private static class Infant implements Comparable<Infant> {
+
+        public long a;
+        public int index;
+
+        public Infant(long a, int index) {
+            this.a = a;
+            this.index = index;
         }
 
-        out.println(happiness);
+        @Override
+        public int compareTo(Infant infant) {
+            return (int) (infant.a - this.a);
+        }
+
     }
 
 }
