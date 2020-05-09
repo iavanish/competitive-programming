@@ -90,11 +90,11 @@ class Solution {
             maxQueue.offerLast(end);
 
             while (nums[maxQueue.peekFirst()] - nums[minQueue.peekFirst()] > limit) {
-                if (maxQueue.peekFirst() == start) {
-                    maxQueue.pollFirst();
-                }
-                else if (minQueue.peekFirst() == start) {
+                if (minQueue.peekFirst() == start) {
                     minQueue.pollFirst();
+                }
+                else if (maxQueue.peekFirst() == start) {
+                    maxQueue.pollFirst();
                 }
                 start++;
             }
