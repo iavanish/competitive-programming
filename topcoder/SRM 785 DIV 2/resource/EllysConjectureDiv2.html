@@ -1,0 +1,33 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+Elly remembers hearing about the Collatz conjecture a long time ago, but apparently she doesn't remember it well.
+She only vaguely remembers that the conjecture involves a process in which we start with a positive integer and end with some positive integer.
+This is the process she remembers:
+<ol>
+<li>Start with a positive integer <i>X</i>.</li>
+<li>If the number you currently have is even, divide it by two.</li>
+<li>If the number you currently have is odd, multiply it by 1 and then add 3 to it. (This is effectively the same as only adding 3 to the number.)</li>
+<li>Continue this process until you get to a number you've already seen. That number is the result.</li>
+</ol>
+</p>
+
+<br></br>
+
+<p>
+For example, let's see what happens if we execute this process starting with <i>X</i> = 42:
+<ol>
+<li>42 is even, so we divide it by 2 and get 21.</li>
+<li>21 is odd, so we add 3, getting 24.</li>
+<li>24 is even, so we divide it by 2, getting 12.</li>
+<li>12 is also even, so we divide it by 2, getting 6.</li>
+<li>6 is still even, so we divide it by 2, getting 3.</li>
+<li>3 is odd, so we add 3 and get 6.</li>
+<li>6 is a number we've had before, so we stop here.</li>
+</ol> 
+Thus, the result for <i>X</i> = 42 is 6.
+</p>
+
+<br></br>
+
+<p>
+Given the ints <b>L</b> and <b>R</b>, return the sum of the results for all starting numbers <b>L</b> &le; X &le; <b>R</b>.
+</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>EllysConjectureDiv2</td></tr><tr><td>Method:</td><td>getSum</td></tr><tr><td>Parameters:</td><td>int, int</td></tr><tr><td>Returns:</td><td>long</td></tr><tr><td>Method signature:</td><td>long getSum(int L, int R)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>L</b> will be between 1 and 1,000,000,000, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>R</b> will be between <b>L</b> and 1,000,000,000, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>13</pre></td></tr><tr><td><pre>17</pre></td></tr></table></td></tr><tr><td><pre>Returns: 22</pre></td></tr><tr><td><table><tr><td colspan="2">The results for each of the numbers in the interval [13, 17] are: 4, 4, 6, 4, 4. Their sum is 4 + 4 + 6 + 4 + 4 = 22</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>42</pre></td></tr><tr><td><pre>1337</pre></td></tr></table></td></tr><tr><td><pre>Returns: 6048</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>12345</pre></td></tr><tr><td><pre>67890</pre></td></tr></table></td></tr><tr><td><pre>Returns: 259216</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>42666</pre></td></tr><tr><td><pre>133742</pre></td></tr></table></td></tr><tr><td><pre>Returns: 425026</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>123456789</pre></td></tr><tr><td><pre>987654321</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4032921822</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
