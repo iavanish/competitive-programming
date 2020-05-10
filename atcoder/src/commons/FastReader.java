@@ -114,7 +114,7 @@ public class FastReader {
         return nextDouble;
     }
 
-    private void fillBuffer() {
+    public void fillBuffer() {
         try {
             bytesRead = inputStream.read(buffer, bufferPointer = 0, BUFFER_SIZE);
             if (bytesRead == -1) {
@@ -125,7 +125,7 @@ public class FastReader {
         }
     }
 
-    private byte read() {
+    public byte read() {
         if (bufferPointer == bytesRead) {
             fillBuffer();
         }

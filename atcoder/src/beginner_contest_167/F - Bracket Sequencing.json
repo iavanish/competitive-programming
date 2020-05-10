@@ -1,0 +1,49 @@
+{
+  "name" : "F - Bracket Sequencing",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "2\n)\n(()\n",
+    "output" : "Yes\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "2\n)(\n()\n",
+    "output" : "No\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "4\n((()))\n((((((\n))))))\n()()()\n",
+    "output" : "Yes\n",
+    "index" : 2,
+    "active" : true
+  }, {
+    "input" : "3\n(((\n)\n)\n",
+    "output" : "No\n",
+    "index" : 3,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_167",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_167.FBracketSequencing",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.10",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 167",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

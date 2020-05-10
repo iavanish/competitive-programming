@@ -1,0 +1,44 @@
+{
+  "name" : "C - Skill Up",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "3 3 10\n60 2 2 4\n70 8 7 9\n50 2 3 9\n",
+    "output" : "120\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "3 3 10\n100 3 1 4\n100 1 5 9\n100 2 6 5\n",
+    "output" : "-1\n",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "8 5 22\n100 3 7 5 3 1\n164 4 5 2 7 8\n334 7 2 7 2 9\n234 4 7 2 8 2\n541 5 4 3 3 6\n235 4 8 6 9 7\n394 3 6 1 6 2\n872 8 4 3 7 2\n",
+    "output" : "1067\n",
+    "index" : 2,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_167",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_167.CSkillUp",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.10",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 167",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
