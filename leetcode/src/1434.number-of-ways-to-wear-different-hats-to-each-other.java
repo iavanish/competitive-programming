@@ -71,50 +71,54 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // @lc code=start
 class Solution {
 
     public int numberWays(List<List<Integer>> hats) {
-        List<List<Integer>> whoCanWear = new ArrayList<>();
-        for (int i = 0; i < 41; i++) {
-            whoCanWear.add(new ArrayList<>());
+        List<Set<Integer>> invertedHats = new ArrayList<>();
+        for (int i = 0; i <= 40; i++) {
+            invertedHats.add(new HashSet<>());
         }
         for (int i = 0; i < hats.size(); i++) {
             for (Integer hat : hats.get(i)) {
-                whoCanWear.get(hat).add(i);
+                invertedHats.get(hat).add(i + 1);
             }
         }
 
-        long[][] dp = new long[41][1024];
-        for (int i = 0; i < 41; i++) {
+        int allMask = (1 << hats.size()) - 1;
+        long[][] dp = new long[allMask + 1][41];
+        for (int i = 0; i <= allMask; i++) {
             Arrays.fill(dp[i], -1);
         }
-        return (int) numberWays(whoCanWear, (1 << hats.size()) - 1, 0, 1, dp);
+
+        return (int) solve(invertedHats, 1, allMask, 0, dp);
     }
 
-    private long mod = 1_000_000_007;
+    private final long mod = 1_000_000_007;
 
-    private long numberWays(List<List<Integer>> whoCanWear, int mask, int chosen, int hat, long[][] dp) {
-        if (mask == chosen) {
+    private long solve(List<Set<Integer>> invertedHats, int currHat, int allMask, int mask, long[][] dp) {
+        if (allMask == mask) {
             return 1;
         }
-        else if (hat == 41) {
+        else if (currHat == 41) {
             return 0;
         }
-        if (dp[hat][chosen] != -1) {
-            return dp[hat][chosen];
+        if (dp[mask][currHat] != -1) {
+            return dp[mask][currHat];
         }
-        long result = numberWays(whoCanWear, mask, chosen, hat+1, dp) % mod;
-        for (Integer who : whoCanWear.get(hat)) {
-            if (((chosen >> who) & 1) == 0) {
-                result += (numberWays(whoCanWear, mask, chosen | (1 << who), hat+1, dp) % mod);
-                result %= mod;
+        dp[mask][currHat] = solve(invertedHats, currHat + 1, allMask, mask, dp);
+        for (Integer i : invertedHats.get(currHat)) {
+            if (((mask >> (i - 1)) & 1) == 0) {
+                dp[mask][currHat] += solve(invertedHats, currHat + 1, allMask, (mask | (1 << (i - 1))), dp);
+                dp[mask][currHat] %= mod;
             }
         }
-        dp[hat][chosen] = result;
-        return result;
+
+        return dp[mask][currHat];
     }
 
 }
