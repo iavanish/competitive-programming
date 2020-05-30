@@ -1,0 +1,39 @@
+{
+  "name" : "E - ∙ (Bullet)",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "3\n1 2\n-1 1\n2 -1\n",
+    "output" : "5\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "10\n3 2\n3 2\n-1 1\n2 -1\n-3 -9\n-8 12\n7 7\n8 1\n8 2\n8 4\n",
+    "output" : "479\n",
+    "index" : 1,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_168",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_168.EBullet",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.17",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 168",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

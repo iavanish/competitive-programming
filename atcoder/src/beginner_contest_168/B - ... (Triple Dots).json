@@ -1,0 +1,39 @@
+{
+  "name" : "B - ... (Triple Dots)",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "7\nnikoandsolstice\n",
+    "output" : "nikoand...\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "40\nferelibenterhominesidquodvoluntcredunt\n",
+    "output" : "ferelibenterhominesidquodvoluntcredunt\n",
+    "index" : 1,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_168",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_168.BTripleDots",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.17",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 168",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

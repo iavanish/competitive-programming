@@ -1,0 +1,34 @@
+{
+  "name" : "A. Sequence with Digits",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "8\n1 4\n487 1\n487 2\n487 3\n487 4\n487 5\n487 6\n487 7\n",
+    "output" : "42\n487\n519\n528\n544\n564\n588\n628\n",
+    "index" : 0,
+    "active" : true
+  } ],
+  "location" : "src/round_643_div_2",
+  "vmArgs" : "-Xmx256M",
+  "mainClass" : "Main",
+  "taskClass" : "round_643_div_2.ASequenceWithDigits",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.16",
+  "contestName" : "Codeforces - Codeforces Round #643 (Div. 2)",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}

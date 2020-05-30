@@ -1,0 +1,39 @@
+{
+  "name" : "C - : (Colon)",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "3 4 9 0\n",
+    "output" : "5.00000000000000000000\n",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "3 4 10 40\n",
+    "output" : "4.56425719433005567605\n",
+    "index" : 1,
+    "active" : true
+  } ],
+  "location" : "src/beginner_contest_168",
+  "vmArgs" : "-Xmx1024M",
+  "mainClass" : "Main",
+  "taskClass" : "beginner_contest_168.CColon",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020.05.17",
+  "contestName" : "AtCoder - AtCoder Beginner Contest 168",
+  "truncate" : true,
+  "inputClass" : "commons.FastReader",
+  "outputClass" : "java.io.PrintWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
