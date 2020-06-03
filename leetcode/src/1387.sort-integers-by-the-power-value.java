@@ -97,6 +97,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 // @lc code=start
 class Solution {
@@ -104,16 +105,18 @@ class Solution {
     public int getKth(int lo, int hi, int k) {
         Map<Integer, Integer> mem = new HashMap<>();
         mem.put(1, 0);
-        List<Pair> sortedResult = new ArrayList<>();
+        PriorityQueue<Pair> priorityQueue = new PriorityQueue<>();
         for (int i = lo; i <= hi; i++) {
             if (!mem.containsKey(i)) {
-                sortedResult.add(new Pair(i, populateMem(mem, i)));
+                priorityQueue.offer(new Pair(i, populateMem(mem, i)));
             } else {
-                sortedResult.add(new Pair(i, mem.get(i)));
+                priorityQueue.offer(new Pair(i, mem.get(i)));
             }
         }
-        Collections.sort(sortedResult);
-        return sortedResult.get(k - 1).key;
+        while (k-- > 1) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek().key;
     }
 
     private int populateMem(Map<Integer, Integer> mem, int curr) {
@@ -137,6 +140,9 @@ class Solution {
 
         @Override
         public int compareTo(Pair pair) {
+            if (this.value == pair.value) {
+                return Integer.compare(this.key, pair.key);
+            }
             return Integer.compare(this.value, pair.value);
         }
 
