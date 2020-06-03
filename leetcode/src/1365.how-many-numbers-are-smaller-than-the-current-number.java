@@ -63,37 +63,23 @@ class Solution {
 
     public int[] smallerNumbersThanCurrent(int[] nums) {
         int n = nums.length;
-        Pair[] pairs = new Pair[n];
-        for (int i = 0; i < n; i++) {
-            pairs[i] = new Pair(nums[i], i);
-        }
-        Arrays.sort(pairs);
+        int[] sortedNums = Arrays.copyOf(nums, n);
+        Arrays.sort(sortedNums);
 
         int[] result = new int[n];
         for (int i = 0; i < n; i++) {
-            int j = i - 1;
-            while (j >= 0 && pairs[j].value == pairs[i].value) {
-                j--;
+            int index = Arrays.binarySearch(sortedNums, nums[i] - 1);
+            if (index < 0) {
+                index = -index;
+                index -= 2;
             }
-            result[pairs[i].index] = j + 1;
+            while (index < n - 1 && sortedNums[index + 1] == nums[i] - 1) {
+                index++;
+            }
+            result[i] = index + 1;
         }
 
         return result;
-    }
-
-    private static class Pair implements Comparable<Pair> {
-        public int value;
-        public int index;
-
-        public Pair(int value, int index) {
-            this.value = value;
-            this.index = index;
-        }
-
-        @Override
-        public int compareTo(Pair pair) {
-            return Integer.compare(this.value, pair.value);
-        }
     }
 
 }
