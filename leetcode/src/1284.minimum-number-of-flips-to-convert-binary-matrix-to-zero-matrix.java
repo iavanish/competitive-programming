@@ -84,17 +84,17 @@ class Solution {
         int n = mat[0].length;
         int result = Integer.MAX_VALUE;
 
-        for (int i = 0; i < Math.pow(2, m * n); i++) {
+        for (int i = 0; i < (1 << (m * n)); i++) {
             int temp = i;
             int[][] copy = copy(mat, m, n);
             int countBits = 0;
             for (int j = 0; j < m && temp > 0; j++) {
                 for (int k = 0; k < n && temp > 0; k++) {
-                    if (temp % 2 != 0) {
+                    if ((temp & 1) != 0) {
                         flip(copy, j, k);
                         countBits++;
                     }
-                    temp /= 2;
+                    temp >>= 1;
                 }
             }
             if (isZero(copy)) {
