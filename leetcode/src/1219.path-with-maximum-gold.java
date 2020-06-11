@@ -76,7 +76,7 @@ class Solution {
         int gold = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] > 0) {
+                if (grid[i][j] != 0) {
                     gold = Math.max(gold, getMaximumGold(grid, i, j, new boolean[grid.length][grid[0].length]));
                 }
             }
@@ -85,9 +85,6 @@ class Solution {
     }
 
     private int getMaximumGold(int[][] grid, int i, int j, boolean[][] isVisited) {
-        if (grid[i][j] == 0) {
-            return 0;
-        }
         int gold = 0;
         isVisited[i][j] = true;
         for (int x = 0; x < 4; x++) {
@@ -102,7 +99,8 @@ class Solution {
     }
 
     private boolean visitable(int[][] grid, int nextI, int nextJ, boolean[][] isVisited) {
-        return nextI >= 0 && nextI < grid.length && nextJ >= 0 && nextJ < grid[0].length && !isVisited[nextI][nextJ];
+        return nextI >= 0 && nextI < grid.length && nextJ >= 0 && nextJ < grid[0].length && !isVisited[nextI][nextJ] &&
+                grid[nextI][nextJ] != 0;
     }
 
 }
