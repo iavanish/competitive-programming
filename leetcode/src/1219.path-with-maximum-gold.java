@@ -76,7 +76,9 @@ class Solution {
         int gold = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                gold = Math.max(gold, getMaximumGold(grid, i, j, new boolean[grid.length][grid[0].length]));
+                if (grid[i][j] > 0) {
+                    gold = Math.max(gold, getMaximumGold(grid, i, j, new boolean[grid.length][grid[0].length]));
+                }
             }
         }
         return gold;
