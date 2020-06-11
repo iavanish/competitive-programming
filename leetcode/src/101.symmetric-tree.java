@@ -15,44 +15,45 @@
  *
  * Given a binary tree, check whether it is a mirror of itself (ie, symmetric
  * around its center).
- * 
+ *
  * For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
- * 
- * 
+ *
+ *
  * ⁠   1
  * ⁠  / \
  * ⁠ 2   2
  * ⁠/ \ / \
  * 3  4 4  3
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * But the following [1,2,2,null,3,null,3] is not:
- * 
- * 
+ *
+ *
  * ⁠   1
  * ⁠  / \
  * ⁠ 2   2
  * ⁠  \   \
  * ⁠  3    3
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * Note:
  * Bonus points if you could solve it both recursively and iteratively.
- * 
+ *
  */
 
 // @lc code=start
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -67,8 +68,7 @@ class Solution {
     private boolean isSymmetric(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return true;
-        }
-        else if ((root1 == null ^ root2 == null) || (root1.val != root2.val)) {
+        } else if ((root1 == null ^ root2 == null) || (root1.val != root2.val)) {
             return false;
         }
         return isSymmetric(root1.left, root2.right) && isSymmetric(root1.right, root2.left);

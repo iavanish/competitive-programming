@@ -43,10 +43,10 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -56,8 +56,7 @@ class Solution {
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return true;
-        }
-        else if (root1 == null ^ root2 == null) {
+        } else if (root1 == null ^ root2 == null) {
             return false;
         }
 

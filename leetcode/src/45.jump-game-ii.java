@@ -50,7 +50,7 @@ class Solution {
             minJump[i] = minJump[window] + 1;
         }
 
-        return minJump[n-1];
+        return minJump[n - 1];
     }
 
 }

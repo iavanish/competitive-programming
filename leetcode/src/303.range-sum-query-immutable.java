@@ -42,13 +42,13 @@ class NumArray {
 
     public NumArray(int[] nums) {
         cumulativeSums = new int[nums.length + 1];
-        for(int i = 0; i < nums.length; i++) {
-            cumulativeSums[i+1] = cumulativeSums[i] + nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            cumulativeSums[i + 1] = cumulativeSums[i] + nums[i];
         }
     }
-    
+
     public int sumRange(int i, int j) {
-        return cumulativeSums[j+1] - cumulativeSums[i];
+        return cumulativeSums[j + 1] - cumulativeSums[i];
     }
 
 }

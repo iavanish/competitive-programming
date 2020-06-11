@@ -17,32 +17,32 @@
  * S representing the stones you have.  Each character in S is a type of stone
  * you have.  You want to know how many of the stones you have are also
  * jewels.
- * 
+ *
  * The letters in J are guaranteed distinct, and all characters in J and S are
  * letters. Letters are case sensitive, so "a" is considered a different type
  * of stone from "A".
- * 
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: J = "aA", S = "aAAbbbb"
  * Output: 3
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: J = "z", S = "ZZ"
  * Output: 0
- * 
- * 
+ *
+ *
  * Note:
- * 
- * 
+ *
+ *
  * S and J will consist of letters and have length at most 50.
  * The characters in J are distinct.
- * 
- * 
+ *
+ *
  */
 
 import java.util.HashSet;
@@ -53,13 +53,13 @@ class Solution {
 
     public int numJewelsInStones(String J, String S) {
         Set<Character> isJewel = new HashSet<>();
-        for(int i = 0; i < J.length(); i++) {
+        for (int i = 0; i < J.length(); i++) {
             isJewel.add(J.charAt(i));
         }
 
         int numJewelsInStones = 0;
-        for(int i = 0; i < S.length(); i++) {
-            if(isJewel.contains(S.charAt(i))) {
+        for (int i = 0; i < S.length(); i++) {
+            if (isJewel.contains(S.charAt(i))) {
                 numJewelsInStones++;
             }
         }

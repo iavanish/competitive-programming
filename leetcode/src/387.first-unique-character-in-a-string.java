@@ -47,8 +47,7 @@ class Solution {
         for (int i = 0; i < s.length(); i++) {
             if (!nonUniqueSet.contains(s.charAt(i)) && !uniqueMap.containsKey(s.charAt(i))) {
                 uniqueMap.put(s.charAt(i), i);
-            }
-            else {
+            } else {
                 uniqueMap.remove(s.charAt(i));
                 nonUniqueSet.add(s.charAt(i));
             }

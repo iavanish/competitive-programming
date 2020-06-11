@@ -99,14 +99,14 @@ class Solution {
         for (int i = 1; i <= N; i++) {
             allN.add(i);
         }
-        int[] countTrustees = new int[N+1];
+        int[] countTrustees = new int[N + 1];
 
         for (int[] t : trust) {
             allN.remove(t[0]);
             countTrustees[t[1]]++;
         }
 
-        if (allN.size() == 1 && countTrustees[allN.iterator().next()] == N-1) {
+        if (allN.size() == 1 && countTrustees[allN.iterator().next()] == N - 1) {
             return allN.iterator().next();
         }
         return -1;

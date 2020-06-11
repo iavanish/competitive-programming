@@ -92,14 +92,13 @@ class Solution {
             while (nums[maxQueue.peekFirst()] - nums[minQueue.peekFirst()] > limit) {
                 if (minQueue.peekFirst() == start) {
                     minQueue.pollFirst();
-                }
-                else if (maxQueue.peekFirst() == start) {
+                } else if (maxQueue.peekFirst() == start) {
                     maxQueue.pollFirst();
                 }
                 start++;
             }
 
-            result = Math.max(result, end-start+1);
+            result = Math.max(result, end - start + 1);
         }
 
         return result;

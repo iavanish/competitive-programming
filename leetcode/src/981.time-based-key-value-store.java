@@ -94,36 +94,40 @@ class TimeMap {
 
     private Map<String, List<Pair>> map;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public TimeMap() {
         map = new HashMap<>();
     }
-    
+
     public void set(String key, String value, int timestamp) {
         List<Pair> list = map.getOrDefault(key, new ArrayList<>());
         list.add(new Pair(value, timestamp));
         map.put(key, list);
     }
-    
+
     public String get(String key, int timestamp) {
         List<Pair> list = map.getOrDefault(key, null);
-        if(list == null) {
+        if (list == null) {
             return "";
         }
         int index = Collections.binarySearch(list, new Pair("", timestamp));
-        if(index < 0) {
+        if (index < 0) {
             index *= -1;
             index -= 2;
         }
-        if(index < 0) {
+        if (index < 0) {
             return "";
         }
         return list.get(index).value;
     }
 
     private static class Pair implements Comparable<Pair> {
+
         public String value;
         public int timestamp;
+
         public Pair(String value, int timestamp) {
             this.value = value;
             this.timestamp = timestamp;

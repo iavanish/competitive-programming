@@ -43,12 +43,16 @@ class Trie {
 
     private TrieNode trie;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public Trie() {
         trie = new TrieNode();
     }
-    
-    /** Inserts a word into the trie. */
+
+    /**
+     * Inserts a word into the trie.
+     */
     public void insert(String word) {
         TrieNode temp = trie;
         for (int i = 0; i < word.length(); i++) {
@@ -56,14 +60,18 @@ class Trie {
         }
         temp.isLeaf = true;
     }
-    
-    /** Returns if the word is in the trie. */
+
+    /**
+     * Returns if the word is in the trie.
+     */
     public boolean search(String word) {
         TrieNode temp = traverseTrie(word);
         return temp != null && temp.isLeaf;
     }
-    
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
     public boolean startsWith(String prefix) {
         TrieNode temp = traverseTrie(prefix);
         return temp != null;
@@ -78,24 +86,30 @@ class Trie {
     }
 
     private static class TrieNode {
+
         public TrieNode[] children;
         public boolean isLeaf;
+
         public TrieNode() {
             children = new TrieNode[26];
             isLeaf = false;
         }
+
         public TrieNode insert(char c) {
             if (getChild(c) == null) {
                 children[getKey(c)] = new TrieNode();
             }
             return getChild(c);
         }
+
         public TrieNode getChild(char c) {
             return children[getKey(c)];
         }
+
         private int getKey(char c) {
             return c - 'a';
         }
+
     }
 
 }

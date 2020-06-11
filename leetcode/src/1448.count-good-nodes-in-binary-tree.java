@@ -97,8 +97,7 @@ class Solution {
         max += (goodNodes(root.left, sortedPath) + goodNodes(root.right, sortedPath));
         if (count == 0) {
             sortedPath.remove(root.val);
-        }
-        else {
+        } else {
             sortedPath.put(root.val, count);
         }
         return max;

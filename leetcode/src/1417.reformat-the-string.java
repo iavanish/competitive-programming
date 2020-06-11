@@ -101,12 +101,11 @@ class Solution {
     private String reformat(char[] s, boolean startDigit) {
         StringBuilder result = new StringBuilder();
         int i = 0;
-        int j = s.length-1;
+        int j = s.length - 1;
         while (i <= j) {
             if (startDigit) {
                 result.append(s[i++]);
-            }
-            else {
+            } else {
                 result.append(s[j--]);
             }
             startDigit = !startDigit;

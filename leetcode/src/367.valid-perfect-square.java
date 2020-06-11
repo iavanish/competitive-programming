@@ -51,11 +51,9 @@ class Solution {
             long middle = left + (right - left) / 2;
             if (middle * middle == num) {
                 return true;
-            }
-            else if (middle * middle < num) {
+            } else if (middle * middle < num) {
                 left = middle + 1;
-            }
-            else {
+            } else {
                 right = middle - 1;
             }
         }

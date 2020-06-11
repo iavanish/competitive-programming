@@ -37,13 +37,14 @@
  */
 
 // @lc code=start
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -57,10 +58,10 @@ class Solution {
     }
 
     private void sumEvenGrandparent(TreeNode root, int parent, int grandParent) {
-        if(root == null) {
+        if (root == null) {
             return;
         }
-        if(grandParent % 2 == 0) {
+        if (grandParent % 2 == 0) {
             sum += root.val;
         }
         sumEvenGrandparent(root.left, root.val, parent);

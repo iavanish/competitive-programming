@@ -14,20 +14,20 @@
  * Testcase Example:  '[4,2,1,3]'
  *
  * Sort a linked list in O(n log n) time using constant space complexity.
- * 
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: 4->2->1->3
  * Output: 1->2->3->4
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: -1->5->3->4->0
  * Output: -1->0->3->4->5
- * 
+ *
  */
 
 // @lc code=start
@@ -35,9 +35,9 @@
 /**
  * Definition for singly-linked list.
  * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
+ * int val;
+ * ListNode next;
+ * ListNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -81,15 +81,13 @@ class Solution {
             if (l1.val <= l2.val) {
                 temp = l1;
                 l1 = l1.next;
-            }
-            else {
+            } else {
                 temp = l2;
                 l2 = l2.next;
             }
             if (mergedList == null) {
                 mergedList = temp;
-            }
-            else {
+            } else {
                 trav.next = temp;
             }
             trav = temp;

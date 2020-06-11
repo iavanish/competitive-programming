@@ -53,33 +53,32 @@ class Solution {
 
     public List<Integer> findSubstring(String s, String[] words) {
         int n = words.length;
-        if(n == 0) {
+        if (n == 0) {
             return new ArrayList<>();
         }
         int m = words[0].length();
 
         Map<String, Integer> wordMap = new HashMap<>();
-        for(String w : words) {
+        for (String w : words) {
             wordMap.put(w, wordMap.getOrDefault(w, 0) + 1);
         }
 
         List<Integer> result = new ArrayList<>();
-        for(int i = 0; i + n*m <= s.length(); i++) {
+        for (int i = 0; i + n * m <= s.length(); i++) {
             boolean flag = true;
             Map<String, Integer> seenMap = new HashMap<>();
-            for(int j = i; j < i + n*m; j += m) {
+            for (int j = i; j < i + n * m; j += m) {
                 String substring = s.substring(j, j + m);
                 int wordCount = wordMap.getOrDefault(substring, 0);
                 int seenCount = seenMap.getOrDefault(substring, 0);
-                if(seenCount < wordCount) {
+                if (seenCount < wordCount) {
                     seenMap.put(substring, seenCount + 1);
-                }
-                else {
+                } else {
                     flag = false;
                     break;
                 }
             }
-            if(flag) {
+            if (flag) {
                 result.add(i);
             }
         }

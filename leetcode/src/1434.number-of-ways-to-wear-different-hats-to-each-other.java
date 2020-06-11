@@ -78,6 +78,8 @@ import java.util.Set;
 // @lc code=start
 class Solution {
 
+    private final long mod = 1_000_000_007;
+
     public int numberWays(List<List<Integer>> hats) {
         List<Set<Integer>> invertedHats = new ArrayList<>();
         for (int i = 0; i <= 40; i++) {
@@ -98,13 +100,10 @@ class Solution {
         return (int) solve(invertedHats, 1, allMask, 0, dp);
     }
 
-    private final long mod = 1_000_000_007;
-
     private long solve(List<Set<Integer>> invertedHats, int currHat, int allMask, int mask, long[][] dp) {
         if (allMask == mask) {
             return 1;
-        }
-        else if (currHat == 41) {
+        } else if (currHat == 41) {
             return 0;
         }
         if (dp[mask][currHat] != -1) {

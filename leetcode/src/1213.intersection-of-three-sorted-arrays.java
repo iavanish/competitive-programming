@@ -16,24 +16,24 @@
  * Given three integer arrays arr1, arr2 and arr3 sorted in strictly increasing
  * order, return a sorted array of only the integers that appeared in all three
  * arrays.
- * 
- * 
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: arr1 = [1,2,3,4,5], arr2 = [1,2,5,7,9], arr3 = [1,3,4,5,8]
  * Output: [1,5]
  * Explanation: Only 1 and 5 appeared in the three arrays.
- * 
- * 
- * 
+ *
+ *
+ *
  * Constraints:
- * 
- * 
+ *
+ *
  * 1 <= arr1.length, arr2.length, arr3.length <= 1000
  * 1 <= arr1[i], arr2[i], arr3[i] <= 2000
- * 
- * 
+ *
+ *
  */
 
 import java.util.ArrayList;
@@ -47,30 +47,27 @@ class Solution {
         int i = 0;
         int j = 0;
         int k = 0;
-        while(i < arr1.length && j < arr2.length && k < arr3.length) {
+        while (i < arr1.length && j < arr2.length && k < arr3.length) {
             int min = Math.min(arr1[i], Math.min(arr2[j], arr3[k]));
-            while(i < arr1.length && arr1[i] < min) {
+            while (i < arr1.length && arr1[i] < min) {
                 i++;
             }
-            while(j < arr2.length && arr2[j] < min) {
+            while (j < arr2.length && arr2[j] < min) {
                 j++;
             }
-            while(k < arr3.length && arr3[k] < min) {
+            while (k < arr3.length && arr3[k] < min) {
                 k++;
             }
-            if(i < arr1.length && j < arr2.length && k < arr3.length && min == arr1[i] && min == arr2[j] && min == arr3[k]) {
+            if (i < arr1.length && j < arr2.length && k < arr3.length && min == arr1[i] && min == arr2[j] && min == arr3[k]) {
                 intersection.add(min);
                 i++;
                 j++;
                 k++;
-            }
-            else if(arr1[i] == min) {
+            } else if (arr1[i] == min) {
                 i++;
-            }
-            else if(arr2[j] == min) {
+            } else if (arr2[j] == min) {
                 j++;
-            }
-            else {
+            } else {
                 k++;
             }
         }

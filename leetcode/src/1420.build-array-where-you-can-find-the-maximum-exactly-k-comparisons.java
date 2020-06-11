@@ -86,8 +86,8 @@ class Solution {
 
     public int numOfArrays(int n, int m, int k) {
         long mod = 1000000007;
-        long[][][] dp = new long[n+1][m+1][k+1];
-        long[][][] prefix = new long[n+1][m+1][k+1];
+        long[][][] dp = new long[n + 1][m + 1][k + 1];
+        long[][][] prefix = new long[n + 1][m + 1][k + 1];
 
         for (int i = 1; i <= m; i++) {
             dp[1][i][1] = 1;
@@ -96,12 +96,12 @@ class Solution {
         for (int a = 1; a <= n; a++) {
             for (int b = 1; b <= m; b++) {
                 for (int c = 1; c <= k; c++) {
-                    long s = (b * dp[a-1][b][c]) % mod;
-                    s += prefix[a-1][b-1][c-1];
+                    long s = (b * dp[a - 1][b][c]) % mod;
+                    s += prefix[a - 1][b - 1][c - 1];
                     s %= mod;
                     dp[a][b][c] += s;
                     dp[a][b][c] %= mod;
-                    prefix[a][b][c] = (dp[a][b][c] + prefix[a][b-1][c]) % mod;
+                    prefix[a][b][c] = (dp[a][b][c] + prefix[a][b - 1][c]) % mod;
                 }
             }
         }

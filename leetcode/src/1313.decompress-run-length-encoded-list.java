@@ -48,14 +48,14 @@ class Solution {
 
     public int[] decompressRLElist(int[] nums) {
         List<Integer> decompressedList = new ArrayList<>();
-        for(int i = 0; i < nums.length; i+=2) {
-            for(int j = 0; j < nums[i]; j++) {
-                decompressedList.add(nums[i+1]);
+        for (int i = 0; i < nums.length; i += 2) {
+            for (int j = 0; j < nums[i]; j++) {
+                decompressedList.add(nums[i + 1]);
             }
         }
 
         int[] result = new int[decompressedList.size()];
-        for(int i = 0; i < decompressedList.size(); i++) {
+        for (int i = 0; i < decompressedList.size(); i++) {
             result[i] = decompressedList.get(i);
         }
         return result;

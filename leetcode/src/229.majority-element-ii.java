@@ -46,19 +46,15 @@ class Solution {
         for (int n : nums) {
             if (n == firstElement) {
                 firstElementCount++;
-            }
-            else if (n == secondElement) {
+            } else if (n == secondElement) {
                 secondElementCount++;
-            }
-            else if (firstElementCount == 0) {
+            } else if (firstElementCount == 0) {
                 firstElement = n;
                 firstElementCount++;
-            }
-            else if (secondElementCount == 0) {
+            } else if (secondElementCount == 0) {
                 secondElement = n;
                 secondElementCount++;
-            }
-            else {
+            } else {
                 firstElementCount--;
                 secondElementCount--;
             }

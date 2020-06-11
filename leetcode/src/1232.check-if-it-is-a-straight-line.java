@@ -57,7 +57,7 @@ class Solution {
         double slope = slope(coordinates, 0, 1);
         for (int i = 0; i < coordinates.length; i++) {
             for (int j = i + 1; j < coordinates.length; j++) {
-                if (slope != slope(coordinates, i ,j)) {
+                if (slope != slope(coordinates, i, j)) {
                     return false;
                 }
             }

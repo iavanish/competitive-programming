@@ -104,11 +104,11 @@ class Solution {
         if (root.val == key) {
             return new NodeData(parent, depth);
         }
-        NodeData temp = findNodeData(root.left, key, root.val, depth+1);
+        NodeData temp = findNodeData(root.left, key, root.val, depth + 1);
         if (temp != null) {
             return temp;
         }
-        return findNodeData(root.right, key, root.val, depth+1);
+        return findNodeData(root.right, key, root.val, depth + 1);
     }
 
     private static class NodeData {

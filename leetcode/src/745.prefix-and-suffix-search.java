@@ -14,34 +14,34 @@
  * Testcase Example:  '["WordFilter","f"]\n[[["apple"]],["a","e"]]'
  *
  * Given many words, words[i] has weight i.
- * 
+ *
  * Design a class WordFilter that supports one function, WordFilter.f(String
  * prefix, String suffix). It will return the word with given prefix and suffix
  * with maximum weight. If no word exists, return -1.
- * 
+ *
  * Examples:
- * 
- * 
+ *
+ *
  * Input:
  * WordFilter(["apple"])
  * WordFilter.f("a", "e") // returns 0
  * WordFilter.f("b", "") // returns -1
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * Note:
- * 
- * 
+ *
+ *
  * words has length in range [1, 15000].
  * For each test case, up to words.length queries WordFilter.f may be made.
  * words[i] has length in range [1, 10].
  * prefix, suffix have lengths in range [0, 10].
  * words[i] and prefix, suffix queries consist of lowercase letters only.
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 
 import java.util.LinkedHashSet;
@@ -56,18 +56,18 @@ class WordFilter {
     public WordFilter(String[] words) {
         prefixTrie = new TrieNode();
         suffixTrie = new TrieNode();
-        for (int i = words.length-1; i >= 0; i--) {
+        for (int i = words.length - 1; i >= 0; i--) {
             TrieNode tempPrefix = prefixTrie;
             TrieNode tempSuffix = suffixTrie;
             tempPrefix.sortedWeightSet.add(i);
             tempSuffix.sortedWeightSet.add(i);
-            for (int j = 0, k = words[i].length()-1; j < words[i].length(); j++, k--) {
+            for (int j = 0, k = words[i].length() - 1; j < words[i].length(); j++, k--) {
                 tempPrefix = tempPrefix.addChild(words[i].charAt(j), i);
                 tempSuffix = tempSuffix.addChild(words[i].charAt(k), i);
             }
         }
     }
-    
+
     public int f(String prefix, String suffix) {
         TrieNode tempPrefix = prefixTrie;
         TrieNode tempSuffix = suffixTrie;
@@ -77,7 +77,7 @@ class WordFilter {
         if (tempPrefix == null) {
             return -1;
         }
-        for (int i = suffix.length()-1; i >= 0 && tempSuffix != null; i--) {
+        for (int i = suffix.length() - 1; i >= 0 && tempSuffix != null; i--) {
             tempSuffix = tempSuffix.getChild(suffix.charAt(i));
         }
         if (tempSuffix == null) {
@@ -92,12 +92,15 @@ class WordFilter {
     }
 
     private static class TrieNode {
+
         private TrieNode[] children;
         private Set<Integer> sortedWeightSet;
+
         public TrieNode() {
             children = new TrieNode[26];
             sortedWeightSet = new LinkedHashSet<>();
         }
+
         private TrieNode addChild(char c, int weight) {
             if (children[getKey(c)] == null) {
                 children[getKey(c)] = new TrieNode();
@@ -105,12 +108,15 @@ class WordFilter {
             children[getKey(c)].sortedWeightSet.add(weight);
             return children[getKey(c)];
         }
+
         private TrieNode getChild(char c) {
             return children[getKey(c)];
         }
+
         private int getKey(char c) {
             return c - 'a';
         }
+
     }
 
 }

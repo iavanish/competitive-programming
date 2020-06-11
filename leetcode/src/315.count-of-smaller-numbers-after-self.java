@@ -16,18 +16,18 @@
  * You are given an integer array nums and you have to return a new counts
  * array. The counts array has the property where counts[i] is the number of
  * smaller elements to the right of nums[i].
- * 
+ *
  * Example:
- * 
- * 
+ *
+ *
  * Input: [5,2,6,1]
- * Output: [2,1,1,0] 
+ * Output: [2,1,1,0]
  * Explanation:
  * To the right of 5 there are 2 smaller elements (2 and 1).
  * To the right of 2 there is only 1 smaller element (1).
  * To the right of 6 there is 1 smaller element (1).
  * To the right of 1 there is 0 smaller element.
- * 
+ *
  */
 
 import java.util.ArrayList;
@@ -58,10 +58,10 @@ class Solution {
             rebase = -minElement;
         }
         List<Integer> result = new Stack<>();
-        int[] segmentTree = new int[3 * (totalElements+1)];
+        int[] segmentTree = new int[3 * (totalElements + 1)];
         result.add(0);
-        updateSegmentTree(segmentTree, 0, 0, totalElements, nums[n-1] + rebase);
-        for (int i = n-2; i >= 0; i--) {
+        updateSegmentTree(segmentTree, 0, 0, totalElements, nums[n - 1] + rebase);
+        for (int i = n - 2; i >= 0; i--) {
             result.add(querySegmentTree(segmentTree, 0, 0, totalElements, 0, nums[i] + rebase - 1));
             updateSegmentTree(segmentTree, 0, 0, totalElements, nums[i] + rebase);
         }
@@ -73,8 +73,7 @@ class Solution {
     private int querySegmentTree(int[] segmentTree, int node, int left, int right, int i, int j) {
         if (right < i || j < left || right < left) {
             return 0;
-        }
-        else if (i <= left && right <= j) {
+        } else if (i <= left && right <= j) {
             return segmentTree[node];
         }
         int middle = calculateMiddle(left, right);
@@ -85,8 +84,7 @@ class Solution {
     private void updateSegmentTree(int[] segmentTree, int node, int left, int right, int i) {
         if (left == right && left == i) {
             segmentTree[node]++;
-        }
-        else if (left <= i && i <= right) {
+        } else if (left <= i && i <= right) {
             int middle = calculateMiddle(left, right);
             updateSegmentTree(segmentTree, node * 2 + 1, left, middle, i);
             updateSegmentTree(segmentTree, node * 2 + 2, middle + 1, right, i);

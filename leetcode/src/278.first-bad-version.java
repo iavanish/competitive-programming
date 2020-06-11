@@ -52,8 +52,7 @@ public class Solution extends VersionControl {
             int middle = left + (right - left) / 2;
             if (isBadVersion(middle)) {
                 right = middle;
-            }
-            else {
+            } else {
                 left = middle + 1;
             }
         }

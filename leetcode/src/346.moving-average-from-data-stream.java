@@ -15,19 +15,19 @@
  *
  * Given a stream of integers and a window size, calculate the moving average
  * of all integers in the sliding window.
- * 
+ *
  * Example:
- * 
- * 
+ *
+ *
  * MovingAverage m = new MovingAverage(3);
  * m.next(1) = 1
  * m.next(10) = (1 + 10) / 2
  * m.next(3) = (1 + 10 + 3) / 3
  * m.next(5) = (10 + 3 + 5) / 3
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 
 import java.util.LinkedList;
@@ -36,21 +36,23 @@ import java.util.Queue;
 // @lc code=start
 class MovingAverage {
 
-    private Queue<Integer> queue;
     int sum;
     int size;
+    private Queue<Integer> queue;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public MovingAverage(int size) {
         queue = new LinkedList<>();
         sum = 0;
         this.size = size;
     }
-    
+
     public double next(int val) {
         queue.add(val);
         sum += val;
-        if(queue.size() > size) {
+        if (queue.size() > size) {
             sum -= queue.poll();
         }
         return (double) sum / (double) queue.size();

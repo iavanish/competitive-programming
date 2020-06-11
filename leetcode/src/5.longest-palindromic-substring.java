@@ -15,22 +15,22 @@
  *
  * Given a string s, find the longest palindromic substring in s. You may
  * assume that the maximum length of s is 1000.
- * 
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: "babad"
  * Output: "bab"
  * Note: "aba" is also a valid answer.
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: "cbbd"
  * Output: "bb"
- * 
- * 
+ *
+ *
  */
 
 // @lc code=start
@@ -46,14 +46,13 @@ class Solution {
         int end = 0;
         for (int i = 0; i < n; i++) {
             int palLength1 = buildPalindrome(s, i, i);
-            int palLength2 = buildPalindrome(s, i, i+1);
+            int palLength2 = buildPalindrome(s, i, i + 1);
             if (palLength1 < palLength2) {
                 if (end - start + 1 < palLength2) {
                     start = i - (palLength2 / 2 - 1);
                     end = i + 1 + (palLength2 / 2 - 1);
                 }
-            }
-            else {
+            } else {
                 if (end - start + 1 < palLength1) {
                     start = i - (palLength1 / 2);
                     end = i + (palLength1 / 2);
@@ -71,7 +70,7 @@ class Solution {
         if (s.charAt(left) != s.charAt(right)) {
             return 1;
         }
-        while (0 < left && right < s.length()-1 && s.charAt(left-1) == s.charAt(right+1)) {
+        while (0 < left && right < s.length() - 1 && s.charAt(left - 1) == s.charAt(right + 1)) {
             left--;
             right++;
         }

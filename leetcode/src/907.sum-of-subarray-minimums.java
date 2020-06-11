@@ -15,33 +15,33 @@
  *
  * Given an array of integers A, find the sum of min(B), where B ranges over
  * every (contiguous) subarray of A.
- * 
+ *
  * Since the answer may be large, return the answer modulo 10^9 + 7.
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: [3,1,2,4]
  * Output: 17
  * Explanation: Subarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2],
- * [1,2,4], [3,1,2,4]. 
+ * [1,2,4], [3,1,2,4].
  * Minimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1.  Sum is 17.
- * 
- * 
- * 
+ *
+ *
+ *
  * Note:
- * 
- * 
+ *
+ *
  * 1 <= A.length <= 30000
  * 1 <= A[i] <= 30000
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 import java.util.Stack;
@@ -72,7 +72,7 @@ class Solution {
             leftSpan[spanIndex.pop()] = spanCount.pop();
         }
 
-        for (int i = n-1; i >= 0; i--) {
+        for (int i = n - 1; i >= 0; i--) {
             int count = 1;
             while (!spanIndex.isEmpty() && A[spanIndex.peek()] > A[i]) {
                 rightSpan[spanIndex.pop()] += spanCount.peek();
@@ -87,14 +87,14 @@ class Solution {
 
         int sumSubarrayMins = 0;
         for (int i = 0; i < n; i++) {
-            sumSubarrayMins += (A[i] * ((leftSpan[i] + rightSpan[i] - 1 + (leftSpan[i]-1) * (rightSpan[i]-1))) % 1000000007);
+            sumSubarrayMins += (A[i] * ((leftSpan[i] + rightSpan[i] - 1 + (leftSpan[i] - 1) * (rightSpan[i] - 1))) % 1000000007);
             sumSubarrayMins %= 1000000007;
         }
         return sumSubarrayMins;
     }
 
     private int summation(int n) {
-        return (n * (n+1)) / 2;
+        return (n * (n + 1)) / 2;
     }
 
 }

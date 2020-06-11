@@ -56,12 +56,16 @@ class MagicDictionary {
 
     private TrieNode trie;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public MagicDictionary() {
         trie = new TrieNode();
     }
-    
-    /** Build a dictionary through a list of words */
+
+    /**
+     * Build a dictionary through a list of words
+     */
     public void buildDict(String[] dict) {
         for (String d : dict) {
             TrieNode temp = trie;
@@ -71,8 +75,10 @@ class MagicDictionary {
             temp.isLeaf = true;
         }
     }
-    
-    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
+
+    /**
+     * Returns if there is any word in the trie that equals to the given word after modifying exactly one character
+     */
     public boolean search(String word) {
         return search(trie, word, 0, false);
     }
@@ -82,7 +88,7 @@ class MagicDictionary {
             return isModified && trie.isLeaf;
         }
         if (trie.getChild(word.charAt(index)) != null) {
-            if (search(trie.getChild(word.charAt(index)), word, index+1, isModified)) {
+            if (search(trie.getChild(word.charAt(index)), word, index + 1, isModified)) {
                 return true;
             }
         }
@@ -91,7 +97,7 @@ class MagicDictionary {
         }
         for (int i = 0; i < 26; i++) {
             if (i != word.charAt(index) - 'a' && trie.getChild(i) != null) {
-                if (search(trie.getChild(i), word, index+1, true)) {
+                if (search(trie.getChild(i), word, index + 1, true)) {
                     return true;
                 }
             }
@@ -100,27 +106,34 @@ class MagicDictionary {
     }
 
     private static class TrieNode {
+
         public TrieNode[] children;
         public boolean isLeaf;
+
         public TrieNode() {
             children = new TrieNode[26];
             isLeaf = false;
         }
+
         private TrieNode addChild(char c) {
             if (getChild(c) == null) {
                 children[getKey(c)] = new TrieNode();
             }
             return getChild(c);
         }
+
         private TrieNode getChild(char c) {
             return children[getKey(c)];
         }
+
         private TrieNode getChild(int c) {
             return children[c];
         }
+
         private int getKey(char c) {
             return c - 'a';
         }
+
     }
 
 }

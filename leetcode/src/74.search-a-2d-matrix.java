@@ -15,16 +15,16 @@
  *
  * Write an efficient algorithm that searches for a value in an m x n matrix.
  * This matrix has the following properties:
- * 
- * 
+ *
+ *
  * Integers in each row are sorted from left to right.
  * The first integer of each row is greater than the last integer of the
  * previous row.
- * 
- * 
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input:
  * matrix = [
  * ⁠ [1,   3,  5,  7],
@@ -33,11 +33,11 @@
  * ]
  * target = 3
  * Output: true
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input:
  * matrix = [
  * ⁠ [1,   3,  5,  7],
@@ -46,7 +46,7 @@
  * ]
  * target = 13
  * Output: false
- * 
+ *
  */
 
 // @lc code=start
@@ -63,11 +63,9 @@ class Solution {
             int middle = first + (last - first) / 2;
             if (matrix[middle][0] == target) {
                 return true;
-            }
-            else if (matrix[middle][0] < target) {
+            } else if (matrix[middle][0] < target) {
                 first = middle + 1;
-            }
-            else {
+            } else {
                 last = middle - 1;
             }
         }
@@ -83,11 +81,9 @@ class Solution {
             int middle = first + (last - first) / 2;
             if (matrix[pivot][middle] == target) {
                 return true;
-            }
-            else if (matrix[pivot][middle] < target) {
+            } else if (matrix[pivot][middle] < target) {
                 first = middle + 1;
-            }
-            else {
+            } else {
                 last = middle - 1;
             }
         }

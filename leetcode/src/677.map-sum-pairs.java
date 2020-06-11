@@ -47,11 +47,13 @@ class MapSum {
 
     private TrieNode trie;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public MapSum() {
         trie = new TrieNode();
     }
-    
+
     public void insert(String key, int val) {
         TrieNode temp = trie;
         for (int i = 0; i < key.length(); i++) {
@@ -68,7 +70,7 @@ class MapSum {
         temp.isLeaf = true;
         temp.currNodeValue = val;
     }
-    
+
     public int sum(String prefix) {
         int i = 0;
         TrieNode temp = trie;
@@ -82,16 +84,19 @@ class MapSum {
     }
 
     private static class TrieNode {
+
         public TrieNode[] children;
         public boolean isLeaf;
         public int currNodeValue;
         public int value;
+
         public TrieNode() {
             children = new TrieNode[26];
             isLeaf = false;
             currNodeValue = 0;
             value = 0;
         }
+
         private TrieNode addChild(char c, int value) {
             if (getChild(c) == null) {
                 children[getKey(c)] = new TrieNode();
@@ -99,12 +104,15 @@ class MapSum {
             children[getKey(c)].value += value;
             return getChild(c);
         }
+
         private TrieNode getChild(char c) {
             return children[getKey(c)];
         }
+
         private int getKey(char c) {
             return c - 'a';
         }
+
     }
 
 }

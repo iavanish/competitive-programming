@@ -80,7 +80,7 @@ class StockSpanner {
         spansStack = new int[10000];
         top = -1;
     }
-    
+
     public int next(int price) {
         int span = 1;
         while (0 <= top && pricesStack[top] <= price) {

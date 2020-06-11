@@ -47,12 +47,16 @@ class WordDictionary {
 
     private TrieNode trie;
 
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public WordDictionary() {
         trie = new TrieNode();
     }
-    
-    /** Adds a word into the data structure. */
+
+    /**
+     * Adds a word into the data structure.
+     */
     public void addWord(String word) {
         TrieNode temp = trie;
         for (int i = 0; i < word.length(); i++) {
@@ -60,8 +64,10 @@ class WordDictionary {
         }
         temp.isLeaf = true;
     }
-    
-    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+
+    /**
+     * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+     */
     public boolean search(String word) {
         return search(trie, word, 0);
     }
@@ -69,15 +75,13 @@ class WordDictionary {
     private boolean search(TrieNode trie, String word, int index) {
         if (word.length() == index) {
             return trie != null && trie.isLeaf;
-        }
-        else if (trie == null) {
+        } else if (trie == null) {
             return false;
-        }
-        else if (word.charAt(index) != '.') {
-            return search(trie.getChild(word.charAt(index)), word, index+1);
+        } else if (word.charAt(index) != '.') {
+            return search(trie.getChild(word.charAt(index)), word, index + 1);
         }
         for (int i = 0; i < 26; i++) {
-            if (trie.getChild(i) != null && search(trie.getChild(i), word, index+1)) {
+            if (trie.getChild(i) != null && search(trie.getChild(i), word, index + 1)) {
                 return true;
             }
         }
@@ -85,27 +89,34 @@ class WordDictionary {
     }
 
     private static class TrieNode {
+
         private TrieNode[] children;
         private boolean isLeaf;
+
         public TrieNode() {
             children = new TrieNode[26];
             isLeaf = false;
         }
+
         private TrieNode addChild(char c) {
             if (children[getKey(c)] == null) {
                 children[getKey(c)] = new TrieNode();
             }
             return children[getKey(c)];
         }
+
         private TrieNode getChild(char c) {
             return children[getKey(c)];
         }
+
         private TrieNode getChild(int c) {
             return children[c];
         }
+
         private int getKey(char c) {
             return c - 'a';
         }
+
     }
 
 }

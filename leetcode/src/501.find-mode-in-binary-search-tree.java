@@ -15,39 +15,39 @@
  *
  * Given a binary search tree (BST) with duplicates, find all the mode(s) (the
  * most frequently occurred element) in the given BST.
- * 
+ *
  * Assume a BST is defined as follows:
- * 
- * 
+ *
+ *
  * The left subtree of a node contains only nodes with keys less than or equal
  * to the node's key.
  * The right subtree of a node contains only nodes with keys greater than or
  * equal to the node's key.
  * Both the left and right subtrees must also be binary search trees.
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * For example:
  * Given BST [1,null,2,2],
- * 
- * 
+ *
+ *
  * ⁠  1
  * ⁠   \
  * ⁠    2
  * ⁠   /
  * ⁠  2
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * return [2].
- * 
+ *
  * Note: If a tree has more than one mode, you can return them in any order.
- * 
+ *
  * Follow up: Could you do that without using any extra space? (Assume that the
  * implicit stack space incurred due to recursion does not count).
- * 
+ *
  */
 
 // @lc code=start
@@ -55,10 +55,10 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -76,8 +76,7 @@ class Solution {
         inOrder(root);
         if (currCount == modeCount) {
             modes++;
-        }
-        else if (modeCount < currCount) {
+        } else if (modeCount < currCount) {
             modeCount = currCount;
             modes = 1;
         }
@@ -99,22 +98,19 @@ class Solution {
         if (prevVal == null) {
             prevVal = node.val;
             currCount = 1;
-        }
-        else if (prevVal != node.val) {
+        } else if (prevVal != node.val) {
             if (currCount == modeCount) {
                 if (modeValues != null) {
                     modeValues[modes] = prevVal;
                 }
                 modes++;
-            }
-            else if (modeCount < currCount) {
+            } else if (modeCount < currCount) {
                 modeCount = currCount;
                 modes = 1;
             }
             prevVal = node.val;
             currCount = 1;
-        }
-        else {
+        } else {
             currCount++;
         }
     }

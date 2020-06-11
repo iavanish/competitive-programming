@@ -81,22 +81,17 @@ class MyLinkedList {
     private LinkedListNode tail;
     private int size;
 
-    private static class LinkedListNode {
-        public int val;
-        public LinkedListNode next;
-        public LinkedListNode(int val) {
-            this.val = val;
-            this.next = null;
-        }
-    }
-
-    /** Initialize your data structure here. */
+    /**
+     * Initialize your data structure here.
+     */
     public MyLinkedList() {
         head = tail = null;
         size = 0;
     }
-    
-    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+
+    /**
+     * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+     */
     public int get(int index) {
         if (index < 0 || size <= index) {
             return -1;
@@ -107,8 +102,10 @@ class MyLinkedList {
         }
         return trav.val;
     }
-    
-    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+
+    /**
+     * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+     */
     public void addAtHead(int val) {
         LinkedListNode head = new LinkedListNode(val);
         head.next = this.head;
@@ -118,8 +115,10 @@ class MyLinkedList {
         }
         size++;
     }
-    
-    /** Append a node of value val to the last element of the linked list. */
+
+    /**
+     * Append a node of value val to the last element of the linked list.
+     */
     public void addAtTail(int val) {
         LinkedListNode tail = new LinkedListNode(val);
         if (this.tail != null) {
@@ -131,16 +130,16 @@ class MyLinkedList {
         }
         size++;
     }
-    
-    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+
+    /**
+     * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+     */
     public void addAtIndex(int index, int val) {
         if (index == 0) {
             addAtHead(val);
-        }
-        else if (index == size) {
+        } else if (index == size) {
             addAtTail(val);
-        }
-        else if (0 < index && index < size) {
+        } else if (0 < index && index < size) {
             LinkedListNode prev = null;
             LinkedListNode trav = head;
             while (index-- > 0) {
@@ -153,8 +152,10 @@ class MyLinkedList {
             size++;
         }
     }
-    
-    /** Delete the index-th node in the linked list, if the index is valid. */
+
+    /**
+     * Delete the index-th node in the linked list, if the index is valid.
+     */
     public void deleteAtIndex(int index) {
         if (0 <= index && index < size) {
             if (index == 0) {
@@ -162,8 +163,7 @@ class MyLinkedList {
                 if (head == null) {
                     tail = null;
                 }
-            }
-            else {
+            } else {
                 LinkedListNode prev = null;
                 LinkedListNode trav = head;
                 while (index-- > 0) {
@@ -177,6 +177,18 @@ class MyLinkedList {
             }
             size--;
         }
+    }
+
+    private static class LinkedListNode {
+
+        public int val;
+        public LinkedListNode next;
+
+        public LinkedListNode(int val) {
+            this.val = val;
+            this.next = null;
+        }
+
     }
 
 }

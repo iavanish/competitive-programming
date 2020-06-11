@@ -100,8 +100,7 @@ class Solution {
                     if (isLarger(dp[i], temp)) {
                         dp[i] = temp;
                     }
-                }
-                else if (cost[j] < i && !dp[i - cost[j]].equals("0")) {
+                } else if (cost[j] < i && !dp[i - cost[j]].equals("0")) {
                     StringBuilder temp = new StringBuilder();
                     temp.append(c);
                     temp.append(dp[i - cost[j]]);

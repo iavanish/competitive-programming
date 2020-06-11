@@ -71,10 +71,10 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
  * }
  */
 class Solution {
@@ -88,14 +88,11 @@ class Solution {
 
         if (maxLeft != null && minRight != null && maxLeft.val > root.val && minRight.val < root.val) {
             swap(maxLeft, minRight);
-        }
-        else if (maxLeft != null && maxLeft.val > root.val) {
+        } else if (maxLeft != null && maxLeft.val > root.val) {
             swap(maxLeft, root);
-        }
-        else if (minRight != null && minRight.val < root.val) {
+        } else if (minRight != null && minRight.val < root.val) {
             swap(minRight, root);
-        }
-        else {
+        } else {
             recoverTree(root.left);
             recoverTree(root.right);
         }

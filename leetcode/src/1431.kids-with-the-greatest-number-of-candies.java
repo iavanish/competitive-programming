@@ -82,8 +82,7 @@ class Solution {
         for (int i : candies) {
             if (maxCandies - i <= extraCandies) {
                 result.add(true);
-            }
-            else {
+            } else {
                 result.add(false);
             }
         }

@@ -15,60 +15,60 @@
  *
  * Given a balanced parentheses string S, compute the score of the string based
  * on the following rule:
- * 
- * 
+ *
+ *
  * () has score 1
  * AB has score A + B, where A and B are balanced parentheses strings.
  * (A) has score 2 * A, where A is a balanced parentheses string.
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: "()"
  * Output: 1
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: "(())"
  * Output: 2
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 3:
- * 
- * 
+ *
+ *
  * Input: "()()"
  * Output: 2
- * 
- * 
- * 
+ *
+ *
+ *
  * Example 4:
- * 
- * 
+ *
+ *
  * Input: "(()(()))"
  * Output: 6
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * Note:
- * 
- * 
+ *
+ *
  * S is a balanced parentheses string, containing only ( and ).
  * 2 <= S.length <= 50
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 import java.util.Stack;
@@ -80,14 +80,12 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         int index = 0;
         while (index < S.length()) {
-            if (S.charAt(index) == '(' && S.charAt(index+1) == ')') {
+            if (S.charAt(index) == '(' && S.charAt(index + 1) == ')') {
                 index++;
                 stack.push(1);
-            }
-            else if (S.charAt(index) == '(') {
+            } else if (S.charAt(index) == '(') {
                 stack.push(-1);
-            }
-            else {
+            } else {
                 int value = 0;
                 while (stack.peek() >= 0) {
                     value += stack.pop();

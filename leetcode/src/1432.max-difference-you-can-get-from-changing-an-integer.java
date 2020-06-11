@@ -100,8 +100,7 @@ class Solution {
                 for (int k = 0; k < s.length(); k++) {
                     if (s.charAt(k) == (char) (i + '0')) {
                         temp.append((char) (j + '0'));
-                    }
-                    else {
+                    } else {
                         temp.append(s.charAt(k));
                     }
                 }
@@ -112,7 +111,7 @@ class Solution {
         }
 
         Collections.sort(nums);
-        return (int) (nums.get(nums.size()-1) - nums.get(0));
+        return (int) (nums.get(nums.size() - 1) - nums.get(0));
     }
 
 }

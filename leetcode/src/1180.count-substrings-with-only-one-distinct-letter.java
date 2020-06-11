@@ -15,11 +15,11 @@
  *
  * Given a string S, return the number of substrings that have only one
  * distinct letter.
- * 
- * 
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: S = "aaaba"
  * Output: 8
  * Explanation: The substrings with one distinct letter are "aaa", "aa", "a",
@@ -29,23 +29,23 @@
  * "a" occurs 4 times.
  * "b" occurs 1 time.
  * So the answer is 1 + 2 + 4 + 1 = 8.
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: S = "aaaaaaaaaa"
  * Output: 55
- * 
- * 
- * 
+ *
+ *
+ *
  * Constraints:
- * 
- * 
+ *
+ *
  * 1 <= S.length <= 1000
  * S[i] consists of only lowercase English letters.
- * 
- * 
+ *
+ *
  */
 
 // @lc code=start
@@ -54,14 +54,14 @@ class Solution {
     public int countLetters(String S) {
         int countLetters = 0;
         int i = 0;
-        while(i < S.length()) {
+        while (i < S.length()) {
             int j = i;
-            while(j+1 < S.length() && S.charAt(j+1) == S.charAt(i)) {
+            while (j + 1 < S.length() && S.charAt(j + 1) == S.charAt(i)) {
                 j++;
             }
-            int n = j-i+1;
-            countLetters += ((n * (n+1)) / 2);
-            i = j+1;
+            int n = j - i + 1;
+            countLetters += ((n * (n + 1)) / 2);
+            i = j + 1;
         }
 
         return countLetters;

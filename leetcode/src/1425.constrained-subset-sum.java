@@ -17,45 +17,45 @@
  * non-empty subset of that array such that for every two consecutive integers
  * in the subset, nums[i] and nums[j], where i < j, the condition j - i <= k is
  * satisfied.
- * 
+ *
  * A subset of an array is obtained by deleting some number of elements (can be
  * zero) from the array, leaving the remaining elements in their original
  * order.
- * 
- * 
+ *
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: nums = [10,2,-10,5,20], k = 2
  * Output: 37
  * Explanation: The subset is [10, 2, 5, 20].
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: nums = [-1,-2,-3], k = 1
  * Output: -1
  * Explanation: The subset must be non-empty, so we choose the largest
  * number.
- * 
- * 
+ *
+ *
  * Example 3:
- * 
- * 
+ *
+ *
  * Input: nums = [10,-2,-10,-5,20], k = 2
  * Output: 23
  * Explanation: The subset is [10, -2, -5, 20].
- * 
- * 
- * 
+ *
+ *
+ *
  * Constraints:
- * 
- * 
+ *
+ *
  * 1 <= k <= nums.length <= 10^5
  * -10^4 <= nums[i] <= 10^4
- * 
- * 
+ *
+ *
  */
 
 // @lc code=start
@@ -73,7 +73,7 @@ class Solution {
         update(0, dp[0]);
 
         for (int i = 1; i < n; i++) {
-            int max = Math.max(0, maxRange(Math.max(0, i-k), i-1));
+            int max = Math.max(0, maxRange(Math.max(0, i - k), i - 1));
             dp[i] = nums[i] + max;
             update(i, dp[i]);
         }
@@ -87,18 +87,17 @@ class Solution {
     }
 
     private void update(int i, int val) {
-        updateTree(segmentTree, 0, 0, n-1, i, val);
+        updateTree(segmentTree, 0, 0, n - 1, i, val);
     }
 
     private int maxRange(int i, int j) {
-        return queryTree(segmentTree, 0, 0, n-1, i, j);
+        return queryTree(segmentTree, 0, 0, n - 1, i, j);
     }
 
     private void updateTree(int[] segmentTree, int node, int left, int right, int index, int value) {
         if (left == right && left == index) {
             segmentTree[node] = value;
-        }
-        else if (left <= index && index <= right) {
+        } else if (left <= index && index <= right) {
             int middle = middle(left, right);
             updateTree(segmentTree, node * 2 + 1, left, middle, index, value);
             updateTree(segmentTree, node * 2 + 2, middle + 1, right, index, value);
@@ -109,8 +108,7 @@ class Solution {
     private int queryTree(int[] segmentTree, int node, int left, int right, int queryI, int queryJ) {
         if (right < left || queryJ < left || right < queryI) {
             return 0;
-        }
-        else if (queryI <= left && right <= queryJ) {
+        } else if (queryI <= left && right <= queryJ) {
             return segmentTree[node];
         }
         int middle = middle(left, right);
