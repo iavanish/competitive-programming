@@ -103,6 +103,9 @@ class Solution {
             if (fibonacciNumber <= k) {
                 findMinFibonacciNumbers = Math.min(findMinFibonacciNumbers, (int) (k / fibonacciNumber) + findMinFibonacciNumbers(fibonacciNumbers, k % fibonacciNumber));
             }
+            else {
+                break;
+            }
         }
         dp.put(k, findMinFibonacciNumbers);
         return findMinFibonacciNumbers;
