@@ -102,8 +102,7 @@ class Solution {
         for (Long fibonacciNumber : fibonacciNumbers) {
             if (fibonacciNumber <= k) {
                 findMinFibonacciNumbers = Math.min(findMinFibonacciNumbers, (int) (k / fibonacciNumber) + findMinFibonacciNumbers(fibonacciNumbers, k % fibonacciNumber));
-            }
-            else {
+            } else {
                 break;
             }
         }
