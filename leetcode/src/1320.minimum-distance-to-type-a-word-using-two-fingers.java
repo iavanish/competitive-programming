@@ -92,10 +92,16 @@ class Solution {
     private int[][][] dp;
 
     public int minimumDistance(String word) {
+        int[][] cost = new int[31][31];
         List<Coordinate> grid = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0, k = 0; i < 5; i++) {
+            for (int j = 0; j < 6; j++, k++) {
                 grid.add(new Coordinate(i, j));
+                for (int x = 0, l = 0; x < 5; x++) {
+                    for (int y = 0; y < 6; y++, l++) {
+                        cost[k][l] = Math.abs(i - x) + Math.abs(j - y);
+                    }
+                }
             }
         }
 
@@ -109,13 +115,13 @@ class Solution {
         int minimumDistance = Integer.MAX_VALUE;
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < grid.size(); j++) {
-                minimumDistance = Math.min(minimumDistance, minimumDistance(word, 0, grid, i, j));
+                minimumDistance = Math.min(minimumDistance, minimumDistance(word, 0, grid, i, j, cost));
             }
         }
         return minimumDistance;
     }
 
-    private int minimumDistance(String word, int currIndex, List<Coordinate> grid, int lastCharLeft, int lastCharRight) {
+    private int minimumDistance(String word, int currIndex, List<Coordinate> grid, int lastCharLeft, int lastCharRight, int[][] cost) {
         if (word.length() == currIndex) {
             return 0;
         }
@@ -125,10 +131,8 @@ class Solution {
         }
 
         int nextChar = word.charAt(currIndex) - 'A';
-        int leftMove = Math.abs(grid.get(lastCharLeft).i - grid.get(nextChar).i) + Math.abs(grid.get(lastCharLeft).j - grid.get(nextChar).j) +
-                minimumDistance(word, currIndex + 1, grid, nextChar, lastCharRight);
-        int rightMove = Math.abs(grid.get(lastCharRight).i - grid.get(nextChar).i) + Math.abs(grid.get(lastCharRight).j - grid.get(nextChar).j) +
-                minimumDistance(word, currIndex + 1, grid, lastCharLeft, nextChar);
+        int leftMove = cost[lastCharLeft][nextChar] + minimumDistance(word, currIndex + 1, grid, nextChar, lastCharRight, cost);
+        int rightMove = cost[lastCharRight][nextChar] + minimumDistance(word, currIndex + 1, grid, lastCharLeft, nextChar, cost);
         return dp[currIndex][lastCharLeft][lastCharRight] = Math.min(leftMove, rightMove);
     }
 
