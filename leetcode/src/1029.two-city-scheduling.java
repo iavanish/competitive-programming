@@ -53,15 +53,13 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
 
-    private int[][][] dp;
+    private int[][] dp;
 
     public int twoCitySchedCost(int[][] costs) {
         int n = costs.length;
-        dp = new int[n][n / 2 + 1][n / 2 + 1];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n / 2 + 1; j++) {
-                Arrays.fill(dp[i][j], -1);
-            }
+        dp = new int[n / 2 + 1][n / 2 + 1];
+        for (int i = 0; i < n / 2 + 1; i++) {
+            Arrays.fill(dp[i], -1);
         }
 
         return twoCitySchedCost(costs, 0, n / 2, n / 2);
@@ -71,8 +69,8 @@ class Solution {
         if (costs.length == i) {
             return 0;
         }
-        if (dp[i][n1][n2] != -1) {
-            return dp[i][n1][n2];
+        if (dp[n1][n2] != -1) {
+            return dp[n1][n2];
         }
         int minCost = Integer.MAX_VALUE;
         if (n1 > 0) {
@@ -81,7 +79,7 @@ class Solution {
         if (n2 > 0) {
             minCost = Math.min(minCost, costs[i][1] + twoCitySchedCost(costs, i + 1, n1, n2 - 1));
         }
-        return dp[i][n1][n2] = minCost;
+        return dp[n1][n2] = minCost;
     }
 
 }
