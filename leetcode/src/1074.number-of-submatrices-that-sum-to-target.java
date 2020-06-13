@@ -56,6 +56,9 @@
  *
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 // @lc code=start
 class Solution {
 
@@ -64,21 +67,21 @@ class Solution {
         int n = matrix[0].length;
         int count = 0;
 
-        long[][] cumulativeMatrix = new long[m + 1][n + 1];
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                cumulativeMatrix[i][j] = matrix[i - 1][j - 1] + cumulativeMatrix[i - 1][j] + cumulativeMatrix[i][j - 1] - cumulativeMatrix[i - 1][j - 1];
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                matrix[i][j] += matrix[i][j - 1];
             }
         }
 
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                for (int k = 1; k <= i; k++) {
-                    for (int l = 1; l <= j; l++) {
-                        if (cumulativeMatrix[i][j] - cumulativeMatrix[k - 1][j] - cumulativeMatrix[i][l - 1] + cumulativeMatrix[k - 1][l - 1] == target) {
-                            count++;
-                        }
-                    }
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                Map<Integer, Integer> dp = new HashMap<>();
+                dp.put(0, 1);
+                int sum = 0;
+                for (int[] elements : matrix) {
+                    sum += elements[j] - (i > 0 ? elements[i - 1] : 0);
+                    count += dp.getOrDefault(sum - target, 0);
+                    dp.put(sum, dp.getOrDefault(sum, 0) + 1);
                 }
             }
         }
