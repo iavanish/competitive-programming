@@ -90,8 +90,7 @@ class Solution {
     private void traverseTrie(Trie trie, List<String> result) {
         if (trie.terminatedDirectory != null) {
             result.add(trie.terminatedDirectory);
-        }
-        else {
+        } else {
             for (Map.Entry<String, Trie> node : trie.node.entrySet()) {
                 traverseTrie(node.getValue(), result);
             }
