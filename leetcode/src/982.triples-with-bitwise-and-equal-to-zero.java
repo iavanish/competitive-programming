@@ -67,7 +67,8 @@ class Solution {
         Map<Integer, Integer> andsOfTwoNumbers = new HashMap<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                andsOfTwoNumbers.put(A[i] & A[j], andsOfTwoNumbers.getOrDefault(A[i] & A[j], 0) + 1);
+                int k = A[i] & A[j];
+                andsOfTwoNumbers.put(k, andsOfTwoNumbers.getOrDefault(k, 0) + 1);
             }
         }
 
